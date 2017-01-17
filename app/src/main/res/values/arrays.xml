@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons_photoselect">
+        <item>@drawable/login_camera</item>
+        <item>@drawable/login_album</item>
+    </array>
+</resources>

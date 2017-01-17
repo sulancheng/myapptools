@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    >
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/content_size"
+        android:background="#dddddd"
+        android:textColor="@color/all_blue"
+        android:gravity="center"
+        android:text="小小工具盒"/>
+    <GridView
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:numColumns="2"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:divider="@android:color/transparent"
+        android:id="@+id/lvStyle"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="8dp"
+        android:layout_width="wrap_content"
+        android:stretchMode="columnWidth"
+        android:layout_height="wrap_content"></GridView>
+   <!-- android:horizontalSpacing
+    两列之间的间距。关联方法：setHorizontalSpacing(int)
+    android:numColumns
+    列数。关联方法：setNumColumns(int)
+    android:stretchMode
+    缩放模式。关联方法：setStretchMode(int)
+    android:verticalSpacing
+    两行之间的间距。关联方法：setVerticalSpacing(int)-->
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/activity_base"/>
+    <!-- 自定义属性 -->
+    <!-- step 1 . 定义属性 -->
+    <!-- step 2 . 使用属性 -->
+    <com.susu.hh.myapptools.ui.Toggle
+        android:layout_marginTop="@dimen/common_dimen"
+        android:id="@+id/tg_auto_update"
+        view:lefttext="top"
+        view:title="自动更新设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.susu.hh.myapptools.ui.Toggle>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#dedede" />
+
+    <com.susu.hh.myapptools.ui.Toggle
+        android:id="@+id/tg_sr_intercept"
+        view:type="bottom"
+        view:lefttext="骚扰拦截设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.susu.hh.myapptools.ui.Toggle>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#dedede" />
+
+    <com.susu.hh.myapptools.ui.Toggle
+        android:layout_marginTop="@dimen/common_dimen"
+        android:id="@+id/tg_show_address"
+        view:type="top"
+        view:lefttext="归属地显示设置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.susu.hh.myapptools.ui.Toggle>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#dedede" />
+    <RelativeLayout
+        android:id="@+id/black_number"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:clickable="true">
+
+        <com.susu.hh.myapptools.ui.baseview.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="黑名单"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x40"
+            android:background="@drawable/info_arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#dedede" />
+    <RelativeLayout
+        android:id="@+id/gexing"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:clickable="true">
+
+        <com.susu.hh.myapptools.ui.baseview.BaseTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="个性"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x40"
+            android:background="@drawable/info_arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#dedede" />
+</LinearLayout>

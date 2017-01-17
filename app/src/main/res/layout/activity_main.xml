@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+    <RelativeLayout
+        android:id="@+id/head_main"
+        android:layout_width="match_parent"
+        android:background="@drawable/guide_bcbc"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/left_click"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_width="18dp"
+            android:src="@drawable/home_title_tight"
+            android:layout_height="18dp" />
+        <com.susu.hh.myapptools.ui.baseview.BaseTextView
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:id="@+id/textTit"
+            android:layout_width="wrap_content"
+            android:text="xxx"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/right_click"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_width="18dp"
+            android:src="@drawable/home_more2"
+            android:layout_height="18dp" />
+    </RelativeLayout>
+   <FrameLayout
+       android:id="@+id/vp_main"
+       android:layout_width="match_parent"
+       android:layout_weight="1"
+       android:layout_height="0dp">
+   </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <View
+            android:id="@+id/v"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:background="@android:color/darker_gray" />
+        <RadioGroup
+            android:id="@+id/main_radio"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:padding="3dp"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/home"
+                style="@style/button_style"
+                android:drawableTop="@drawable/home_selector_bc"
+                android:text="首页" />
+
+            <RadioButton
+                android:id="@+id/sort"
+                android:drawableTop="@drawable/home_selector_bc"
+                style="@style/button_style"
+                android:text="分类" />
+           <LinearLayout
+                android:id="@+id/ll_center_more"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                >
+               <RelativeLayout
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:background="@drawable/center_selecter">
+                   <ImageView
+                       android:layout_centerInParent="true"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:src="@drawable/search1"
+                       />
+               </RelativeLayout>
+
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/shop"
+                style="@style/button_style"
+                android:drawableTop="@drawable/home_selector_bc"
+                android:text="购物车" />
+
+            <!--  <RadioButton
+                  style="@style/button_style"
+                  android:drawableTop="@drawable/search_selector_bc"
+                  android:text="社区" />-->
+
+            <RadioButton
+                android:id="@+id/more"
+                style="@style/button_style"
+                android:drawableTop="@drawable/home_selector_bc"
+                android:text="更多" />
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>
