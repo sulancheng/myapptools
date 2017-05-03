@@ -167,6 +167,15 @@ public class VolleyEngine implements Response.Listener<JSONObject> {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(jsonObjectRequest, null);
     }
+    //对外的接口
+    private OnMyNetworkInterface onMyNetworkInterface;
+    public interface OnMyNetworkInterface{
+        void onSucessd(JSONObject jsonObject);
+        void onFail(VolleyError volleyError);
+    }
+    private void setOnMyNetworkInterface(OnMyNetworkInterface onMyNetworkInterface){
+        this.onMyNetworkInterface = onMyNetworkInterface;
+    }
     public void JsonObjRequest2(String url) {
         String tag_json_obj = "JsonObjRequest";
         //伪代码
@@ -185,12 +194,18 @@ public class VolleyEngine implements Response.Listener<JSONObject> {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-
+                //可在调用此方法的时候传入自己的接口 将jsonpbject做了处理之后再次 通过自己的接口返回。
+                if(onMyNetworkInterface !=null){
+                    onMyNetworkInterface.onSucessd(jsonObject);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+                if(onMyNetworkInterface !=null){
+                    //可将结果进行处理传入自己需要的值。
+                    onMyNetworkInterface.onFail(volleyError);
+                }
             }
         }) {
             @Override

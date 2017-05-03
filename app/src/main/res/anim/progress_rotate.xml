@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--在做翻转的动画时候，以Y轴旋转。试着将povptx不写-->
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/loading"
     android:fromDegrees="0"

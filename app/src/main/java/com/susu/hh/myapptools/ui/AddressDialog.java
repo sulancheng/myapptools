@@ -98,4 +98,21 @@ public class AddressDialog extends Dialog implements OnItemClickListener {
 		}
 
 	}
+
+	/*@Override
+	public void show() {
+		super.show();
+		*//**
+		 * 设置宽度全屏，要设置在show的后面    试验可以全屏
+		 *//*
+		LayoutParams layoutParams = getWindow().getAttributes();
+		layoutParams.gravity=Gravity.BOTTOM;
+		layoutParams.width= LayoutParams.MATCH_PARENT;
+		layoutParams.height= LayoutParams.MATCH_PARENT;
+
+		getWindow().getDecorView().setPadding(0, 0, 0, 0);
+
+		getWindow().setAttributes(layoutParams);
+
+	}*/
 }

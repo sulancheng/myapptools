@@ -229,7 +229,6 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         menu.setOnClosedListener(new SlidingMenu.OnClosedListener() {
             @Override
             public void onClosed() {
-                tiaozhuan(tiaoz);
             }
         });
     }
@@ -238,6 +237,8 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         Intent intent;
         switch (o) {
             case 0:
+                Intent intent1 = new Intent(MainActivity.this, ChsmallActivity.class);
+                startActivity(intent1);
                 break;
             case 4:
                 tiaoz = 0;
@@ -342,6 +343,20 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         final AlertDialog dialog = builder.create();
         View contentViews = View.inflate(this, R.layout.photodialog, null);
         dialog.setView(contentViews);
+        dialog.show();
+            /**
+             * 设置宽度全屏，要设置在show的后面   试验  不能全屏
+             */
+           /* WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+            //layoutParams.gravity= Gravity.BOTTOM;
+            layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
+            layoutParams.height= WindowManager.LayoutParams.MATCH_PARENT;
+
+            dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
+
+            dialog.getWindow().setAttributes(layoutParams);*/
+
+
         //dialog.setContentView(contentViews);
         /*ad.getWindow().setContentView(layout);
         ad.getWindow().setBackgroundDrawableResource(R.drawable.bind_dialog_bg);
@@ -365,7 +380,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
                 dialog.dismiss();
             }
         });
-        dialog.show();
+
     }
 
     public static final int REQUESTCODE_NONE = 6;

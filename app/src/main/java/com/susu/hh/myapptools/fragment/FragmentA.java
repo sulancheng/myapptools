@@ -15,7 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ScrollView;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.activity.ChsmallActivity;
+import com.susu.hh.myapptools.activity.DownloadTActivity;
 import com.susu.hh.myapptools.activity.SettingActivity;
+import com.susu.hh.myapptools.activity.gridviewtuoz.GridviewTuoz;
 import com.susu.hh.myapptools.adapter.FcfViewGroupAdapter;
 import com.susu.hh.myapptools.adapter.MyJGGridAdapter;
 import com.susu.hh.myapptools.ui.MyJGGridView;
@@ -90,9 +93,29 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(mContext, SettingActivity.class);
-        startActivity(intent);
         CommenUtils.showSingleToast(mContext, "点击了第" + position + "个");
+        switch (position){
+            case 0:
+                Intent intent = new Intent(mContext, SettingActivity.class);
+                startActivity(intent);
+                break;
+            case 1:
+                Intent intent1 = new Intent(mContext, SkeyActivity.class);
+                startActivity(intent1);
+                break;
+            case 2:
+                Intent intent2 = new Intent(mContext, ChsmallActivity.class);
+                startActivity(intent2);
+                break;
+            case 3:
+                Intent intent3 = new Intent(mContext, DownloadTActivity.class);
+                startActivity(intent3);
+                break;
+            case 4:
+                Intent intent4 = new Intent(mContext, GridviewTuoz.class);
+                startActivity(intent4);
+                break;
+        }
     }
 
 

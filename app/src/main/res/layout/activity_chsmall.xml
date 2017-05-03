@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.susu.hh.myapptools.ui.cehualib.DrawaLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawalayout_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.susu.hh.myapptools.activity.ChsmallActivity">
+    <include android:id="@+id/ll_left_menu" layout="@layout/ll_left_menu_layout"/>
+
+    <include android:id="@+id/ll_main_panle" layout="@layout/ll_main_panle_layout"/>
+</com.susu.hh.myapptools.ui.cehualib.DrawaLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.susu.hh.myapptools.ui.cehualib.MainPanleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#18b6ef">
+
+        <ImageView
+            android:id="@+id/iv_headicon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="4dp"
+            android:src="@drawable/head" />
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="会话"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <com.susu.hh.myapptools.ui.MynoScrollViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#d8d8d8"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_session"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/rb_session_selector"
+            android:gravity="center"
+            android:text="会话"
+            android:textColor="@drawable/rb_color_selector" />
+
+        <RadioButton
+            android:id="@+id/rb_contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/rb_contact_selector"
+            android:gravity="center"
+            android:text="联系人"
+            android:textColor="@drawable/rb_color_selector" />
+
+    </RadioGroup>
+
+
+</com.susu.hh.myapptools.ui.cehualib.MainPanleLayout>

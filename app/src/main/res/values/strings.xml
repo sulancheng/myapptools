@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyappTools</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="home">快捷菜单</string>
 </resources>

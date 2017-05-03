@@ -182,7 +182,7 @@ public class AutoRollLayout extends FrameLayout implements ViewPager.OnPageChang
         }
         // 6  %  5 = 1
         currentItem = mAutoRight ? (currentItem + 1) : (currentItem - 1) % mPagerAdapter.getCount();
-        Log.i(TAG, mPagerAdapter.getPageTitle(currentItem).toString());
+        //Log.i(TAG, mPagerAdapter.getPageTitle(currentItem).toString());
         mViewPager.setCurrentItem(currentItem);
     }
 

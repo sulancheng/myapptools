@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.activity.mytestui.BgActivity;
 
 /**
- * Created by Administrator on 2016/10/28.
+ * Created by 我在测试分支
  */
 public class SettingActivity extends SweipeBackActivity implements View.OnClickListener {
     @Override
@@ -26,10 +27,12 @@ public class SettingActivity extends SweipeBackActivity implements View.OnClickL
         gexing.setOnClickListener(this);
     }
 
+    //点击事件
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.black_number:
+                startActivity(new Intent(this, BgActivity.class));
                 break;
             case R.id.gexing:
                 Intent intent = new Intent(this,GoBackMia.class);
