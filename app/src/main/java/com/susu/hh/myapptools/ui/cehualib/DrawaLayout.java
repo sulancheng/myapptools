@@ -306,7 +306,7 @@ public class DrawaLayout extends FrameLayout {
         Float mainPanleScaleValue = CommenUtils.evaluateFloat(percent, 1, 0.8);
         ViewCompat.setScaleX(mMainPanle, mainPanleScaleValue);
         ViewCompat.setScaleY(mMainPanle, mainPanleScaleValue);
-        Float mainPanleScaleValuetwo = CommenUtils.evaluateFloat(percent, 0, -8);
+        Float mainPanleScaleValuetwo = CommenUtils.evaluateFloat(percent, 0, -4);
         Log.i("mainPanleScaleValuetwo","percent = "+percent);
         Log.i("mainPanleScaleValuetwo","mainPanleScaleValuetwo = "+mainPanleScaleValuetwo);
         //ObjectAnimator animator = ObjectAnimator.ofFloat(mMainPanle,"rotationY",0,mainPanleScaleValuetwo);
@@ -456,10 +456,21 @@ public class DrawaLayout extends FrameLayout {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.i("onMeasure","getWidth="+mMenuView.getWidth()+" getheight = "+mMenuView.getHeight());
+        //mMenuView.measure(widthMeasureSpec,heightMeasureSpec);//儿子需要测量
+        Log.i("onMeasure","getWidth2="+mMenuView.getWidth()+" getheight2 = "+mMenuView.getHeight());
+        Log.i("onMeasure","thisgetWidth="+getMeasuredWidth()+" thisgetheight = "+getMeasuredHeight());
+
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = getMeasuredWidth();
         mHeight = getMeasuredHeight();
+        Log.i("onMeasure","mWidth="+mWidth+" mHeight = "+mHeight);
         mMaxDragRange = (int) (mWidth * 0.3f);
     }
 }

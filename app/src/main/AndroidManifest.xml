@@ -17,14 +17,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
-        <activity
-            android:name=".activity.MainActivity"
-            android:windowSoftInputMode="adjustPan">
+
+        <activity android:name=".activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan">
+
         </activity>
         <activity android:name="com.example.sweet_xue.two_dimension_code.MipcaActivityCapture" />
         <activity android:name=".activity.BaseActivity" />
@@ -280,7 +284,8 @@
         <activity android:name=".activity.TablayoutTest" />
         <activity android:name=".activity.DownloadTActivity" />
         <activity android:name=".activity.gridviewtuoz.GridviewTuoz" />
-        <activity android:name=".activity.SelectLocalwjActivity"></activity>
+        <activity android:name=".activity.SelectLocalwjActivity" />
+
     </application>
 
 </manifest>
