@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import com.susu.hh.myapptools.R;
 import com.susu.hh.myapptools.activity.ChsmallActivity;
 import com.susu.hh.myapptools.activity.DownloadTActivity;
+import com.susu.hh.myapptools.activity.SelectLocalwjActivity;
 import com.susu.hh.myapptools.activity.SettingActivity;
 import com.susu.hh.myapptools.activity.gridviewtuoz.GridviewTuoz;
 import com.susu.hh.myapptools.adapter.FcfViewGroupAdapter;
@@ -114,6 +115,10 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
             case 4:
                 Intent intent4 = new Intent(mContext, GridviewTuoz.class);
                 startActivity(intent4);
+                break;
+            case 5:
+                Intent intent5 = new Intent(mContext, SelectLocalwjActivity.class);
+                startActivity(intent5);
                 break;
         }
     }

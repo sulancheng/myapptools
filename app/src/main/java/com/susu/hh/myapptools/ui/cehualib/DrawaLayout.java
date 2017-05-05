@@ -307,6 +307,8 @@ public class DrawaLayout extends FrameLayout {
         ViewCompat.setScaleX(mMainPanle, mainPanleScaleValue);
         ViewCompat.setScaleY(mMainPanle, mainPanleScaleValue);
         Float mainPanleScaleValuetwo = CommenUtils.evaluateFloat(percent, 0, -8);
+        Log.i("mainPanleScaleValuetwo","percent = "+percent);
+        Log.i("mainPanleScaleValuetwo","mainPanleScaleValuetwo = "+mainPanleScaleValuetwo);
         //ObjectAnimator animator = ObjectAnimator.ofFloat(mMainPanle,"rotationY",0,mainPanleScaleValuetwo);
         mMainPanle.setRotationY(mainPanleScaleValuetwo);
         //animator.setDuration(100);

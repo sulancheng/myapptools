@@ -279,7 +279,8 @@
         <activity android:name=".fragment.SkeyActivity" />
         <activity android:name=".activity.TablayoutTest" />
         <activity android:name=".activity.DownloadTActivity" />
-        <activity android:name=".activity.gridviewtuoz.GridviewTuoz"></activity>
+        <activity android:name=".activity.gridviewtuoz.GridviewTuoz" />
+        <activity android:name=".activity.SelectLocalwjActivity"></activity>
     </application>
 
 </manifest>

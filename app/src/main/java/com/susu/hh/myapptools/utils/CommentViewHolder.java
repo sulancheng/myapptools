@@ -47,7 +47,7 @@ public class CommentViewHolder {
 
     public View convertView;
 
-    public CommentViewHolder(View convertView) {
+    private CommentViewHolder(View convertView) {
 
         this.convertView = convertView;
         convertView.setTag(this);
