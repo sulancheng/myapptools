@@ -24,7 +24,7 @@ import java.util.List;
 public class MyViewPager extends LinearLayout implements OnPageChangeListener, OnClickListener{
 	private ViewPager vpPager;
 	private List<ImageView> list;
-	private int heads;
+	private int headwith;
 	public MyViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		//充气
@@ -62,7 +62,9 @@ public class MyViewPager extends LinearLayout implements OnPageChangeListener, O
 		MyLog.i("winwid",winWidth+"");
 		//获得参数，并设置
 		LayoutParams params = (LayoutParams) tab.getLayoutParams();
-		//heads = head.getLayoutParams().width;
+		int width = head.getWidth();
+		headwith = head.getLayoutParams().width;
+		MyLog.i("compare head with", headwith +" =="+ width);
 		//heads = winWidth;
 		//params.width = winWidth/3;
 		params.width = winWidth/3-12;//减12测试小的间距.
@@ -131,6 +133,7 @@ public class MyViewPager extends LinearLayout implements OnPageChangeListener, O
 		//params.leftMargin = positionOffsetPixels/3+position*winWidth/3;
 		tab.setLayoutParams(params);
 		Log.i("test", "我改变了2");
+		MyLog.i("onPageScrolled"," positionOffset = "+positionOffset +"  positionOffsetPixels ="+positionOffsetPixels);
 	}
 	//页面被选择
 	@Override

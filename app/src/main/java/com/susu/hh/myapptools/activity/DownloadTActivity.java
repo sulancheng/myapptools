@@ -14,6 +14,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.utils.MyLog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -107,6 +108,8 @@ public class DownloadTActivity extends Activity {
                         while((len=inputStream.read(arr))!=-1){
                             outputStream.write(arr, 0, len);
                             count+=len;
+                            int aa = (count*100)/contentLength;
+                            MyLog.i("下载进度","aa ="+aa);
                             if (contentLength > 0) {
                                 m_progressDlg.setProgress(count);
                                 Thread.sleep(500);

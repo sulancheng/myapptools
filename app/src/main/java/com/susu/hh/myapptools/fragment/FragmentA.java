@@ -116,6 +116,7 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
                 startActivity(intent4);
                 break;
             case 5:
+                //获取控件的位置。
                 isWindow(mAutoRollLayout);
                 Intent intent5 = new Intent(mContext, SelectLocalwjActivity.class);
                 startActivity(intent5);
@@ -158,7 +159,10 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
         int[] location = new int[2];
         view.getLocationInWindow(location);
         MyLog.i("location", Arrays.toString(location));//n: [0, 222]
-
+        //控制失败  。
+//        view.layout(-30, location[1], view.getWidth()-30, location[1]+view.getHeight());
+//        view.invalidate();
+//        view.requestLayout();//重回
         Rect recty = new Rect();
         // 获取root在窗体的可视区域
         view.getWindowVisibleDisplayFrame(recty);

@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.example.sweet_xue.two_dimension_code.MipcaActivityCapture" />
         <activity android:name=".activity.BaseActivity" />
         <activity
@@ -282,6 +282,7 @@
         <activity android:name=".activity.DownloadTActivity" />
         <activity android:name=".activity.gridviewtuoz.GridviewTuoz" />
         <activity android:name=".activity.SelectLocalwjActivity" />
+        <activity android:name=".activity.HelloViewpagerActivity"></activity>
     </application>
 
 </manifest>

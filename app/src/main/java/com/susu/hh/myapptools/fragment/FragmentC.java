@@ -147,6 +147,7 @@ public class FragmentC extends BaseFragment implements View.OnClickListener, Vie
         tab.setLayoutParams(params);
         setColor(position);
         Log.i("test", "真的变化了onPageScrolled===2");
+        MyLog.i("onPageScrolled"," position = "+position + " positionOffset = "+positionOffset +"  positionOffsetPixels ="+positionOffsetPixels);
     }
    private void setColor(int position) {
         if(position == 0){
