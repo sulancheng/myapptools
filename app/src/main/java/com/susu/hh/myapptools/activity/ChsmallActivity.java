@@ -33,7 +33,7 @@ public class ChsmallActivity extends Activity {
             @Override
             public void onClose() {
                 ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(iv_headicon, "translationX", 5);
-                ObjectAnimator.of
+                //ObjectAnimator.of
                 objectAnimator.setDuration(500);
                 //来回循环的差值其
                 objectAnimator.setInterpolator(new CycleInterpolator(5));

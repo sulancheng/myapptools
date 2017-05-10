@@ -16,6 +16,7 @@ public class Sliderlayout extends FragmentActivity implements SlidingDrawer.OnSl
     private SlidingDrawer slidingdrawer;
     private View expanded_view;
     private View target,target2;
+    private View bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class Sliderlayout extends FragmentActivity implements SlidingDrawer.OnSl
         setContentView(R.layout.slidertest);
         target = findViewById(R.id.sample_view);
         target2 = findViewById(R.id.sample_view2);
-        View bt = findViewById(R.id.sliding_drawer_collapsed_view);
+        bt = findViewById(R.id.sliding_drawer_collapsed_view);
         slidingdrawer = (SlidingDrawer) findViewById(R.id.slidingdrawer);
         expanded_view = findViewById(R.id.expanded_view);
         //slidingdrawer.setDragView(findViewById(Rz.id.slidable_view));
@@ -35,7 +36,8 @@ public class Sliderlayout extends FragmentActivity implements SlidingDrawer.OnSl
                 slidingdrawer.setState(slidingdrawer.getState() == SlidingDrawer.EXPANDED ? SlidingDrawer.COLLAPSED : SlidingDrawer.EXPANDED);
             }
         });
-        slidingdrawer.setDragView(target2);
+        slidingdrawer.setDragView(expanded_view);//view是谁  谁就可以拖动
+        //设置了sliding_drawer_collapsed_view这个id会看不到字。
     }
 
     @Override
@@ -43,10 +45,11 @@ public class Sliderlayout extends FragmentActivity implements SlidingDrawer.OnSl
         MyLog.i("SlidingDraweronSlide",currentSlide+"");
         expanded_view.setAlpha(currentSlide);
         if(currentSlide == 1){
-            //slidingdrawer.setDragView(expanded_view);
+            slidingdrawer.setDragView(target2);
         }else {
-            //slidingdrawer.setDragView(target);
+            slidingdrawer.setDragView(expanded_view);
         }
+        //slidingDrawer.invalidate();
     }
 
 }

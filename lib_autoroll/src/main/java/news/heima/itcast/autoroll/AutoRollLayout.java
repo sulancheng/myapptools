@@ -221,7 +221,7 @@ public class AutoRollLayout extends FrameLayout implements ViewPager.OnPageChang
             view.setOnClickListener(mDotOnClickListener);
 
             view.setBackgroundResource(R.drawable.selector_dot_bc);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dot_size, dot_size);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dot_size, dot_size);//不能getlayparams回报空指针。
             params.rightMargin = dot_size;
             view.setLayoutParams(params);
             mDotsView.addView(view);

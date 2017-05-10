@@ -19,6 +19,7 @@ import com.susu.hh.myapptools.activity.ChsmallActivity;
 import com.susu.hh.myapptools.activity.DownloadTActivity;
 import com.susu.hh.myapptools.activity.SelectLocalwjActivity;
 import com.susu.hh.myapptools.activity.SettingActivity;
+import com.susu.hh.myapptools.activity.Sliderlayout;
 import com.susu.hh.myapptools.activity.gridviewtuoz.GridviewTuoz;
 import com.susu.hh.myapptools.adapter.FcfViewGroupAdapter;
 import com.susu.hh.myapptools.adapter.MyJGGridAdapter;
@@ -64,8 +65,6 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
         scroll = (ScrollView) view.findViewById(R.id.scroll);
         fcf = (FancyCoverFlow) view.findViewById(R.id.fancyCoverFlow);
         initDatas();
-        isWindow(mAutoRollLayout);
-
     }
 
     private void initDatas() {
@@ -117,8 +116,13 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
                 startActivity(intent4);
                 break;
             case 5:
+                isWindow(mAutoRollLayout);
                 Intent intent5 = new Intent(mContext, SelectLocalwjActivity.class);
                 startActivity(intent5);
+                break;
+            case 6:
+                Intent intent6 = new Intent(mContext, Sliderlayout.class);
+                startActivity(intent6);
                 break;
         }
     }
@@ -153,14 +157,22 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
 
         int[] location = new int[2];
         view.getLocationInWindow(location);
-        MyLog.i("location", Arrays.toString(location));
+        MyLog.i("location", Arrays.toString(location));//n: [0, 222]
+
+        Rect recty = new Rect();
+        // 获取root在窗体的可视区域
+        view.getWindowVisibleDisplayFrame(recty);
+        // 当前视图最外层的高度减去现在所看到的视图的最底部的y坐标
+        MyLog.i("location", "最外层的高度" + recty.left+"  "+ recty.top+" "+recty.bottom+"  "+recty.right);//最外层的高度0  72 1920  1080
+        // 若rootInvisibleHeight高度大于100，则说明当前视图上移了，说明软键盘弹出了
 
         Rect viewRect = new Rect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
+        MyLog.i("location", "viewRect" + viewRect.left+"  "+ viewRect.top+" "+viewRect.bottom+"  "+viewRect.right);
          /*if(rect.contains(viewRect)){
 
         }*/
         if (view.getLocalVisibleRect(rect)) {
-            MyLog.i("location", "可见");
+            MyLog.i("location", "可见"+" getwoth = "+view.getWidth()+"rect = "+rect.width()+"  hwigh = "+view.getHeight()+" rect = "+rect.height());
         }
         return view.getLocalVisibleRect(rect);
         /* 获取屏幕密度（方法2）
