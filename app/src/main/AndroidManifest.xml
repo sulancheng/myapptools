@@ -274,13 +274,18 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="sensorLandscape" />
         <activity android:name=".activity.GoBackMia" />
-        <activity android:name=".activity.Sliderlayout" />
+        <activity android:name=".activity.Sliderlayout"
+            android:theme="@style/MyAppTheme"/>
         <activity android:name=".activity.mytestui.BgActivity" />
         <activity android:name=".activity.ChsmallActivity" />
-        <activity android:name=".fragment.SkeyActivity" />
+        <activity android:name=".fragment.SkeyActivity"
+            android:theme="@style/MyAppTheme"/>
         <activity android:name=".activity.TablayoutTest" />
         <activity android:name=".activity.DownloadTActivity" />
-        <activity android:name=".activity.gridviewtuoz.GridviewTuoz" />
+        <activity android:name=".activity.gridviewtuoz.GridviewTuoz"
+            android:theme="@style/MyAppTheme">
+
+        </activity>
         <activity android:name=".activity.SelectLocalwjActivity" />
         <activity android:name=".activity.HelloViewpagerActivity"></activity>
     </application>

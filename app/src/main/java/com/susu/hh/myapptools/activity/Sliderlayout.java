@@ -1,7 +1,6 @@
 package com.susu.hh.myapptools.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.susu.hh.myapptools.R;
@@ -11,7 +10,7 @@ import com.susu.hh.myapptools.utils.MyLog;
 /**
  * Created by Administrator on 2016/11/15.
  */
-public class Sliderlayout extends FragmentActivity implements SlidingDrawer.OnSlideListener{
+public class Sliderlayout extends SweipeBackActivity implements SlidingDrawer.OnSlideListener{
 
     private SlidingDrawer slidingdrawer;
     private View expanded_view;

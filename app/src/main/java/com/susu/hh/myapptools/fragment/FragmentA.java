@@ -29,6 +29,7 @@ import com.susu.hh.myapptools.utils.MyLog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import at.technikum.mti.fancycoverflow.FancyCoverFlow;
 import news.heima.itcast.autoroll.AutoRollLayout;
@@ -90,41 +91,46 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
         myJGGridView.setOnItemClickListener(this);
         mAutoRollLayout.startAuto();
     }
-
+    public static final int MIN_CLICK_DELAY_TIME = 1000;
+    private long lastClickTime = 0;
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        CommenUtils.showSingleToast(mContext, "点击了第" + position + "个");
-        switch (position){
-            case 0:
-                Intent intent = new Intent(mContext, SettingActivity.class);
-                startActivity(intent);
-                break;
-            case 1:
-                Intent intent1 = new Intent(mContext, SkeyActivity.class);
-                startActivity(intent1);
-                break;
-            case 2:
-                Intent intent2 = new Intent(mContext, ChsmallActivity.class);
-                startActivity(intent2);
-                break;
-            case 3:
-                Intent intent3 = new Intent(mContext, DownloadTActivity.class);
-                startActivity(intent3);
-                break;
-            case 4:
-                Intent intent4 = new Intent(mContext, GridviewTuoz.class);
-                startActivity(intent4);
-                break;
-            case 5:
-                //获取控件的位置。
-                isWindow(mAutoRollLayout);
-                Intent intent5 = new Intent(mContext, SelectLocalwjActivity.class);
-                startActivity(intent5);
-                break;
-            case 6:
-                Intent intent6 = new Intent(mContext, Sliderlayout.class);
-                startActivity(intent6);
-                break;
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
+            lastClickTime = currentTime;
+            CommenUtils.showSingleToast(mContext, "点击了第" + position + "个");
+            switch (position) {
+                case 0:
+                    Intent intent = new Intent(mContext, SettingActivity.class);
+                    startActivity(intent);
+                    break;
+                case 1:
+                    Intent intent1 = new Intent(mContext, SkeyActivity.class);
+                    startActivity(intent1);
+                    break;
+                case 2:
+                    Intent intent2 = new Intent(mContext, ChsmallActivity.class);
+                    startActivity(intent2);
+                    break;
+                case 3:
+                    Intent intent3 = new Intent(mContext, DownloadTActivity.class);
+                    startActivity(intent3);
+                    break;
+                case 4:
+                    Intent intent4 = new Intent(mContext, GridviewTuoz.class);
+                    startActivity(intent4);
+                    break;
+                case 5:
+                    //获取控件的位置。
+                    isWindow(mAutoRollLayout);
+                    Intent intent5 = new Intent(mContext, SelectLocalwjActivity.class);
+                    startActivity(intent5);
+                    break;
+                case 6:
+                    Intent intent6 = new Intent(mContext, Sliderlayout.class);
+                    startActivity(intent6);
+                    break;
+            }
         }
     }
 

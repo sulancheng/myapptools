@@ -30,7 +30,7 @@ import android.widget.TextView;
  * <p/>
  * }
  */
-public class CommentViewHolder {
+public class CommentViewHolder{
 
 
     public static CommentViewHolder getCommentViewHolder(Context context, View convertView, int resource) {
@@ -44,7 +44,6 @@ public class CommentViewHolder {
             return (CommentViewHolder) convertView.getTag();
         }
     }
-
     public View convertView;
 
     private CommentViewHolder(View convertView) {

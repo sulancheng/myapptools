@@ -1,24 +1,23 @@
 package com.susu.hh.myapptools.activity.gridviewtuoz;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.activity.SweipeBackActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridviewTuoz extends Activity {
+public class GridviewTuoz extends SweipeBackActivity {
 
     RelativeLayout rl_strues;
     /**
@@ -42,7 +41,6 @@ public class GridviewTuoz extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_gridview_tuoz);
         this.mContext = this;
         gridview = (DragGrid)findViewById(R.id.gradview);

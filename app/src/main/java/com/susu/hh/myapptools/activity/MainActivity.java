@@ -308,6 +308,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
                 //menu.showContent();//关闭
                 menu.toggle();
                 tiaoz = 4;
+                tiaozhuan(4);
                 break;
             case R.id.name_person:
                 //menu.showContent();//关闭

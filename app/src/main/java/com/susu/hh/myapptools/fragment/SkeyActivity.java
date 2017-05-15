@@ -1,15 +1,15 @@
 package com.susu.hh.myapptools.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.activity.SweipeBackActivity;
 
 /**
  * Created by sucheng
  * on 2017/3/16.
  */
-public class SkeyActivity extends Activity{
+public class SkeyActivity extends SweipeBackActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
