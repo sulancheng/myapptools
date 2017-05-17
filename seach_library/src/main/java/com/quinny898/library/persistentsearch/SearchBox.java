@@ -361,7 +361,15 @@ public class SearchBox extends RelativeLayout {
 			openSearch(true);
 		}
 	}
-	
+	public void toggleSearchclose() {
+		if (searchOpen) {
+			if (TextUtils.isEmpty(getSearchText())) {
+				setLogoTextInt(logoText);
+			}
+			closeSearch();
+		} else {
+		}
+	}
 
     public boolean getSearchOpen(){
         return getVisibility() == VISIBLE;

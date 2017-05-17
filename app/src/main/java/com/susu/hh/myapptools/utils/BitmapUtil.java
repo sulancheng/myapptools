@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
@@ -27,7 +28,22 @@ public class BitmapUtil {
 
 	private static final String TAG = BitmapUtil.class.getSimpleName();
 	public static final String IMAGE_FILE_LOCATION = "file:///sdcard/temp.jpg";
+	//public static final String IMAGE_FILE_LOCATION = new File(getDpath(),"temp.jpg").getAbsolutePath();
+	public static String getDpath(String filename){
+		String folderPath = null;
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+			folderPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/myapptools/"+filename;
+		}else {
+			folderPath = Environment.getDataDirectory().getAbsolutePath() + "/data/myapptools/"+filename;
+		}
+		MyLog.i("getDpathka",Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)+"");
+		return folderPath;
+	}
 
+
+	public static String getDpath() {
+		return getDpath("");
+	}
 	/**
 	 * convert Bitmap to byte array
 	 */

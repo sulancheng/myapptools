@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.susu.hh.myapptools">
-
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"></uses-permission>//控制横竖的权限。
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.hardware.camera" />
@@ -271,8 +271,8 @@
         </activity>
         <activity
             android:name=".activity.player.MyVitamioPlayerTest"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="sensorLandscape" />
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            />
         <activity android:name=".activity.GoBackMia" />
         <activity android:name=".activity.Sliderlayout"
             android:theme="@style/MyAppTheme"/>

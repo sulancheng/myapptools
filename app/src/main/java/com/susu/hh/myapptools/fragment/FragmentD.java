@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.RecognizerIntent;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -98,6 +99,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        MyLog.i("FragmentD","FragmentD调用了");
         View inflated = inflater.inflate(R.layout.fragment_fragment_d, container, false);
         return inflated;
     }
@@ -126,6 +128,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
         pb_loading = (ProgressBar) view.findViewById(R.id.pb_loading);
         search.enableVoiceRecognition(this);
         search.setEnabled(false);
+        search.toggleSearchclose();
         if(items !=null && items.size()>0){
             showData();
         }else {
@@ -140,6 +143,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
             @Override
             public void onMenuClick() {
                 //Hamburger has been clicked
+                search.toggleSearch();
                 Toast.makeText(FragmentD.this.mContext, "Menu click", Toast.LENGTH_SHORT).show();
             }
 
@@ -279,5 +283,15 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
         intent.putExtra("position",position);
         mContext.startActivity(intent);
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (isAdded() && requestCode == SearchBox.VOICE_RECOGNITION_CODE && resultCode == getActivity().RESULT_OK) {
+            ArrayList<String> matches = data
+                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            MyLog.i("fragmentd activity",matches.toString());
+            search.populateEditText(matches.get(0));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

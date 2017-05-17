@@ -13,7 +13,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -30,4 +30,6 @@ dependencies {
     compile project(':lib-fcf')
     compile project(':vitamios')
     compile project(':seach_library')
+    //个性化进度条
+    compile 'com.daimajia.numberprogressbar:library:1.4@aar'
 }

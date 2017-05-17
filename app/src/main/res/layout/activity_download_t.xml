@@ -3,10 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.susu.hh.myapptools.activity.DownloadTActivity">
+
+    <com.daimajia.numberprogressbar.NumberProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        custom:progress_unreached_color="#CCCCCC"
+        custom:progress_reached_color="#3498DB"
+
+        custom:progress_unreached_bar_height="0.75dp"
+        custom:progress_reached_bar_height="1.5dp"
+
+        custom:progress_text_size="10sp"
+        custom:progress_text_color="#3498DB"
+        custom:progress_text_offset="1dp"
+        custom:progress_text_visibility="visible"
+
+        custom:progress_max="100"
+        custom:progress_current="0"
+        android:id="@+id/mprogress"
+        />
 
 </RelativeLayout>

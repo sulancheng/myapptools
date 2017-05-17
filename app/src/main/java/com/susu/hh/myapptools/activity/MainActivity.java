@@ -1,15 +1,17 @@
 package com.susu.hh.myapptools.activity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -85,7 +87,8 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
     };
     private RoundProgressBar person_progress;
     private CircleImageView myphoto;
-    private File file = new File(Environment.getExternalStorageDirectory(), "my.jpg");
+    private File file = new File(BitmapUtil.getDpath(), "myhead.jpg");
+    private AlertDialog dialog;
     ;
 
     @Override
@@ -100,7 +103,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
     }
 
     private void initViewPager() {
-        final String[] tit = {"AA", "本地视频", "", "美女", "浏览器"};
+        final String[] tit = {"AA", "美女", "", "本地视频", "浏览器"};
         datas = new ArrayList<>();
         datas.clear();
         BaseFragment fragmentA = new FragmentA();
@@ -338,10 +341,32 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         });
         builder.show();
     }
+    //相机的权限
+    private void requestMultiplePermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String[] permissions = {Manifest.permission.CAMERA};
+            requestPermissions(permissions, 2000);
+        }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 2000) {
+            for (int i = 0; i < grantResults.length; ++i) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    if (dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                }
+            }
+
+        }
+    }
     private void showPhotoDialog() {
+        requestMultiplePermissions();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final AlertDialog dialog = builder.create();
+        dialog = builder.create();
         View contentViews = View.inflate(this, R.layout.photodialog, null);
         dialog.setView(contentViews);
         dialog.show();
@@ -444,28 +469,21 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         //保存并显示当前选择并剪切之后的图片
         if (requestCode == REQUESTCODE_PHOTOSAVE) {
             extras = data.getExtras();
+            Bitmap photo = null;
             if (extras != null) {
-                Bitmap photo = extras.getParcelable("data");
-                //ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                try {
-                    OutputStream outputStream = new FileOutputStream(file);
-                    photo.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                    outputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                //TODO:保存用户头像
-                //  if (user != null)
-                //    try {
-                //       user.setPortrait(new String(Base64.encodeBase64(baos.toByteArray()), "UTF-8"));
-                //   } catch (UnsupportedEncodingException e) {
-                //       e.printStackTrace();
-                //  }
-                //if (photo != null) {
-                //   needToSave = true;
+                 photo = extras.getParcelable("data");
+            }else if(data!=null){
+                 photo = BitmapFactory.decodeFile(data.getData().getPath());
+            }
+            try {
+                OutputStream outputStream = new FileOutputStream(file);
+                photo.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (photo != null) {
                 myphoto.setImageBitmap(photo);
-                //}
             }
         }
     }

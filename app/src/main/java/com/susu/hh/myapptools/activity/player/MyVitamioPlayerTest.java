@@ -5,13 +5,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -33,6 +38,7 @@ import io.vov.vitamio.widget.VideoView;
 public class MyVitamioPlayerTest extends Activity {
 
     public static  final String TAG = "PlayActivity";
+    private static final int STARTNOF = 1001;
 
     private VideoView mVideoView;
     private MediaController mMediaController;
@@ -55,6 +61,9 @@ public class MyVitamioPlayerTest extends Activity {
                     break;
                 case BATTERY:
                     myMediaController.setBattery(msg.obj.toString());
+                    break;
+                case STARTNOF:
+                    mVideoView.start();
                     break;
             }
         }
@@ -86,7 +95,7 @@ public class MyVitamioPlayerTest extends Activity {
         //获得当前窗体对象
         Window window = this.getWindow();
         //设置当前窗体为全屏显示
-        window.setFlags(flag, flag);
+       // window.setFlags(flag, flag);
         toggleHideyBar();
         setContentView(R.layout.activity_vedio_test);
         mVideoView = (VideoView) findViewById(R.id.surface_view);
@@ -101,9 +110,9 @@ public class MyVitamioPlayerTest extends Activity {
 //        mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 16/9 );
         registerBoradcastReceiver();
         MyLog.i("myMediaController",myMediaController.getProgress()+"jja");
-//        //开始播放
-//        mVideoView.start();
         mHandler.sendEmptyMessageDelayed(TIME,0);
+        //        //开始播放
+        mHandler.sendEmptyMessageDelayed(1001,2500);
 //        new Thread(this).start();
     }
 
@@ -148,10 +157,7 @@ public class MyVitamioPlayerTest extends Activity {
                 int scale = intent.getIntExtra("scale", 100);
                 //把它转成百分比
                 //tv.setText("电池电量为"+((level*100)/scale)+"%");
-                Message msg = new Message();
-                msg.obj = (level*100)/scale+"";
-                msg.what = BATTERY;
-                mHandler.sendMessage(msg);
+                mHandler.obtainMessage(BATTERY,(level*100)/scale+"").sendToTarget();
             }
         }
     };
@@ -204,5 +210,68 @@ public class MyVitamioPlayerTest extends Activity {
 
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
         //END_INCLUDE (set_ui_flags)
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int layoutDirection = newConfig.orientation;
+        Log.i("onConfigurationChanged",layoutDirection+"");
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            //当前为横屏， 在此处添加额外的处理代码
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);//随着用户的使用变化
+            getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);//消除状态栏
+
+
+
+            DisplayMetrics dm = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+            int width = dm.widthPixels;
+            int height = dm.heightPixels;
+            //vWidth = width;
+            ViewGroup.LayoutParams lp = mVideoView.getLayoutParams();
+            lp.width = width;
+            lp.height = height;
+
+            mVideoView.setLayoutParams(lp);
+            getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);//显示状态栏
+
+        } else {
+            //当前为竖屏， 在此处添加额外的处理代码
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);//随着用户的使用变化
+
+
+
+            DisplayMetrics dm = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+            int width = dm.widthPixels;
+            int height = dm.heightPixels;
+            //vWidth = width;
+            ViewGroup.LayoutParams lp = mVideoView.getLayoutParams();
+            lp.width = width;
+            lp.height = (int) (height * (1 - 0.618));
+
+            mVideoView.setLayoutParams(lp);
+            getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);//显示状态栏
+        }
+
+        // 检测屏幕的方向：纵向或横向
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+        }
+
+
+        //检测实体键盘的状态：推出或者合上
+        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+            //实体键盘处于推出状态，在此处添加额外的处理代码
+        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+            //实体键盘处于合上状态，在此处添加额外的处理代码
+        }
+
+
     }
 }

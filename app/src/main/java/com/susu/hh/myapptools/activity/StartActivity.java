@@ -8,6 +8,10 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.utils.BitmapUtil;
+import com.susu.hh.myapptools.utils.LogcatFileManager;
+
+import java.io.File;
 
 public class StartActivity extends Activity {
 
@@ -17,6 +21,15 @@ public class StartActivity extends Activity {
         setContentView(R.layout.activity_start);
         requestMultiplePermissions();
     }
+
+    private void initfile() {
+        String dpath = BitmapUtil.getDpath();
+        File file = new File(dpath);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+    }
+
     private void requestMultiplePermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             boolean b1 = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
@@ -35,9 +48,13 @@ public class StartActivity extends Activity {
                 requestPermissions(permissions, 2000);
             } else {
                 starttoactovoty();
+                initfile();
+                LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
             }
         } else {
             starttoactovoty();
+            initfile();
+            LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
         }
     }
     @Override
@@ -57,6 +74,8 @@ public class StartActivity extends Activity {
                 //starttoactovoty();
             }
             starttoactovoty();
+            initfile();
+            LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
         }
     }
     void starttoactovoty(){

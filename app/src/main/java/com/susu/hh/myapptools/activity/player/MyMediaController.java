@@ -3,14 +3,16 @@ package com.susu.hh.myapptools.activity.player;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.media.AudioManager;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,7 +31,7 @@ import io.vov.vitamio.widget.VideoView;
 /**
  * Created by 鹤 on 2015/10/29.
  */
-public class MyMediaController extends MediaController {
+public class MyMediaController extends MediaController implements View.OnClickListener {
 
     private static final int HIDEFRAM = 0;
     private static final int SHOW_PROGRESS = 2;
@@ -37,8 +39,8 @@ public class MyMediaController extends MediaController {
     private GestureDetector mGestureDetector;
     private ImageButton img_back;//返回键
     private ImageView img_Battery;//电池电量显示
-    private TextView textViewTime;//时间提示
-    private TextView textViewBattery;//文字显示电池
+    private ImageButton textViewTime;//时间提示
+    private TextView textViewBattery,mediacontroller_file_name;//文字显示电池
     private VideoView videoView;
     private Activity activity;
     private Context context;
@@ -100,7 +102,8 @@ public class MyMediaController extends MediaController {
 
     @Override
     protected View makeControllerView() {
-        View v = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(getResources().getIdentifier("mymediacontroller", "layout", getContext().getPackageName()), this);
+        View v = View.inflate(context, R.layout.mymediacontroller, this);
+       // View v = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(getResources().getIdentifier("mymediacontroller", "layout", getContext().getPackageName()), this);
         v.setMinimumHeight(controllerWidth);
         //TOP
 
@@ -108,7 +111,11 @@ public class MyMediaController extends MediaController {
         img_Battery = (ImageView) v.findViewById(R.id.mediacontroller_imgBattery);
         img_back.setOnClickListener(backListener);
         textViewBattery = (TextView)v.findViewById(R.id.mediacontroller_Battery);
-        textViewTime = (TextView)v.findViewById(R.id.mediacontroller_time);
+        textViewTime = (ImageButton)v.findViewById(R.id.mediacontroller_time);
+        textViewTime.setOnClickListener(this);
+        mediacontroller_file_name = (TextView)v.findViewById(R.id.mediacontroller_file_name);
+        mediacontroller_file_name.setOnClickListener(this);
+
         seekBarProgress = (SeekBar)v.findViewById(R.id.mediacontroller_seekbar);
 
         //mid
@@ -156,6 +163,70 @@ public class MyMediaController extends MediaController {
         myHandler.removeMessages(HIDEFRAM);
         myHandler.sendEmptyMessageDelayed(HIDEFRAM, 1);
     }
+
+    @Override
+    public void onClick(View v) {
+        if(v==textViewTime){
+            String path = "";
+            new MyClickTask().execute(path);
+        }
+
+    }
+
+    //关于横竖吧切换
+    private boolean fullscreen = false;
+    public class MyClickTask extends AsyncTask<String,Integer,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            //String path = params[0];
+            String title;
+            MyVitamioPlayerTest myVitamioPlayerTest = (MyVitamioPlayerTest) MyMediaController.this.context;
+            if (!fullscreen) {//设置RelativeLayout的全屏模式
+//                * ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE：
+//
+//                * 希望Activity在横向屏幕上显示，但是可以根据方向传感器指示的方向来进行改变。
+//                * ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE：
+//
+//                * 希望Activity在横向屏上显示，也就是说横向的宽度要大于纵向的高度，并且忽略方向传感器的影响。
+                //   System.out.println("-----linearLayout_player_nba----false------->>：1" );
+                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                title = "xiao";
+                //   LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)linearLayout_player_nba.getLayoutParams();
+                fullscreen = true;//改变全屏/窗口的标记
+            } else {//设置RelativeLayout的窗口模式
+//                * ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT：
+//
+//                * 希望Activity在纵向屏幕上显示，但是可以根据方向传感器指示的方向来进行改变。
+                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+                title = "quan";
+                fullscreen = false;//改变全屏/窗口的标记
+            }
+            //myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            Log.i("titledoInBackground",title);
+            return title;
+        }
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Log.i("resultdoInBackground",result);
+            if(result.equals("xiao"))
+                textViewTime.setBackgroundResource(R.drawable.xiaopin);
+            else
+                textViewTime.setBackgroundResource(R.drawable.quanpin);
+
+        }
+    }
+
 
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
@@ -338,8 +409,8 @@ public class MyMediaController extends MediaController {
 
 
     public void setTime(String time){
-        if (textViewTime != null)
-            textViewTime.setText(time);
+//        if (textViewTime != null)
+//            textViewTime.setText(time);
     }
     //显示电量，
     public void setBattery(String stringBattery){
@@ -372,7 +443,4 @@ public class MyMediaController extends MediaController {
                 videoView.start();
             }
     }
-
-
-
 }

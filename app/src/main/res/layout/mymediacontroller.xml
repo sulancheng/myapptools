@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,14 +11,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:background="#77000000">
+            android:background="#666666">
 
             <ImageButton
                 android:id="@+id/mediacontroller_top_back"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:background="@null"
-                android:src="@drawable/btn_nav_back_n"/>
+                android:layout_width="32dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/video_back"></ImageButton>
 
             <TextView
                 android:id="@+id/mediacontroller_file_name"
@@ -31,18 +30,27 @@
                 android:layout_toRightOf="@+id/mediacontroller_top_back"
                 android:ellipsize="marquee"
                 android:singleLine="true"
-                android:text="file name"/>
+                android:text="file name" />
 
-            <TextView
+            <!--<TextView-->
+            <!--android:id="@+id/mediacontroller_time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:text="17:22"-->
+            <!--android:visibility="gone"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textSize="15sp"/>-->
+            <ImageButton
                 android:id="@+id/mediacontroller_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:text="17:22"
-                android:textColor="#ffffff"
-                android:textSize="15sp"/>
+                android:layout_marginRight="4dp"
+                android:background="@drawable/quanpin" />
 
             <ImageView
                 android:id="@+id/mediacontroller_imgBattery"
@@ -52,7 +60,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/mediacontroller_time"
                 android:gravity="center_vertical"
-                android:src="@drawable/battery"/>
+                android:src="@drawable/battery" />
 
             <TextView
                 android:id="@+id/mediacontroller_Battery"
@@ -64,7 +72,8 @@
                 android:gravity="center_vertical"
                 android:text="45%"
                 android:textColor="#ffffff"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -82,20 +91,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/video_volumn_bg"/>
+                android:src="@drawable/video_volumn_bg" />
 
             <TextView
                 android:id="@+id/operation_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/operation_bg"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom ="true"
                 android:text="32:22/45:00"
                 android:textColor="#ffffff"
                 android:textSize="10sp"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
 
         </RelativeLayout>
@@ -115,7 +123,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/mediacontroller_button"
                 android:contentDescription="@string/mediacontroller_play_pause"
-                android:src="@drawable/mediacontroller_pause"/>
+                android:src="@drawable/mediacontroller_pause" />
 
             <TextView
                 android:id="@+id/mediacontroller_time_current"
@@ -125,8 +133,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/mediacontroller_play_pause"
-                android:text="33:33:33"
-                />
+                android:text="33:33:33" />
 
             <TextView
                 android:id="@+id/mediacontroller_time_total"
@@ -136,7 +143,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:text="33:33:33"/>
+                android:text="33:33:33" />
 
             <SeekBar
                 android:id="@+id/mediacontroller_seekbar"
@@ -147,7 +154,7 @@
                 android:layout_toLeftOf="@id/mediacontroller_time_total"
                 android:layout_toRightOf="@id/mediacontroller_time_current"
                 android:focusable="true"
-                android:max="1000"/>
+                android:max="1000" />
 
         </RelativeLayout>
     </RelativeLayout>
