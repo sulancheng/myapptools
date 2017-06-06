@@ -163,14 +163,14 @@ public class DragGrid extends GridView {
 			windowY = (int) ev.getY();
 			//当前手指所点击的position
 			int position = pointToPosition(downX, downY);
-			if (position!=AdapterView.INVALID_POSITION) {
+			if (position!=AdapterView.INVALID_POSITION) { //如果不是点击到无效的位置
 				//获取当前点击的view
 				View view = getChildAt(position - getFirstVisiblePosition());
 				//得到该item中的删除按钮
 				ImageView iView = (ImageView)view.findViewById(R.id.delet_iv);
 
 				if (isDrag) {
-					if (!inRangeOfView(iView, ev)) {
+					if (!inRangeOfView(iView, ev)) {//是否点击到了删除。
 						int x = (int) ev.getX();// 长安事件的X位置
 						int y = (int) ev.getY();// 长安事件的y位置
 						isDrag = true;
