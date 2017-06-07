@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.example.sweet_xue.two_dimension_code.MipcaActivityCapture" />
         <activity android:name=".activity.BaseActivity" />
         <activity
@@ -272,25 +272,27 @@
         </activity>
         <activity
             android:name=".activity.player.MyVitamioPlayerTest"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            />
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation" />
         <activity android:name=".activity.GoBackMia" />
-        <activity android:name=".activity.Sliderlayout"
-            android:theme="@style/MyAppTheme"/>
+        <activity
+            android:name=".activity.Sliderlayout"
+            android:theme="@style/MyAppTheme" />
         <activity android:name=".activity.mytestui.BgActivity" />
         <activity android:name=".activity.ChsmallActivity" />
-        <activity android:name=".fragment.SkeyActivity"
-            android:theme="@style/MyAppTheme"/>
+        <activity
+            android:name=".fragment.SkeyActivity"
+            android:theme="@style/MyAppTheme" />
         <activity android:name=".activity.TablayoutTest" />
         <activity android:name=".activity.DownloadTActivity" />
-        <activity android:name=".activity.gridviewtuoz.GridviewTuoz"
-            android:theme="@style/MyAppTheme">
-
-        </activity>
+        <activity
+            android:name=".activity.gridviewtuoz.GridviewTuoz"
+            android:theme="@style/MyAppTheme"></activity>
         <activity android:name=".activity.SelectLocalwjActivity" />
-        <activity android:name=".activity.DengtexthuaActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
-        <activity android:name=".activity.HelloViewpagerActivity"></activity>
+        <activity
+            android:name=".activity.DengtexthuaActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.HelloViewpagerActivity" />
+        <activity android:name=".activity.DrawerActivity"></activity>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import com.susu.hh.myapptools.R;
 import com.susu.hh.myapptools.activity.ChsmallActivity;
 import com.susu.hh.myapptools.activity.DengtexthuaActivity;
 import com.susu.hh.myapptools.activity.DownloadTActivity;
+import com.susu.hh.myapptools.activity.DrawerActivity;
 import com.susu.hh.myapptools.activity.SelectLocalwjActivity;
 import com.susu.hh.myapptools.activity.SettingActivity;
 import com.susu.hh.myapptools.activity.Sliderlayout;
@@ -108,7 +109,8 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
                     startActivity(intent);
                     break;
                 case 1:
-                    Intent intent1 = new Intent(mContext, SkeyActivity.class);
+                    //Intent intent1 = new Intent(mContext, SkeyActivity.class);
+                    Intent intent1 = new Intent(mContext, DrawerActivity.class);
                     startActivity(intent1);
                     break;
                 case 2:

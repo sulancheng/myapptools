@@ -32,4 +32,5 @@ dependencies {
     compile project(':seach_library')
     //个性化进度条
     compile 'com.daimajia.numberprogressbar:library:1.4@aar'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'//各种输入法
 }
