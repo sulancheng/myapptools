@@ -30,7 +30,7 @@ import android.widget.TextView;
  * <p/>
  * }
  */
-public class CommentViewHolder{
+public class CommentViewHolder<a extends String>{
 
 
     public static CommentViewHolder getCommentViewHolder(Context context, View convertView, int resource) {
@@ -67,6 +67,10 @@ public class CommentViewHolder{
         return (T) view;
     }
 
+    //根据xml的控件的资源id返回对应控件
+    public a getView(Object resId) { //如果从构造中传入  就可以直接用
+        return (a) resId;
+    }
 
     public <T extends View> T getView(int resId, Class<T> type) {
 
