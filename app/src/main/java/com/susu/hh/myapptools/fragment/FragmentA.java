@@ -103,6 +103,13 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
             lastClickTime = currentTime;
             CommenUtils.showSingleToast(mContext, "点击了第" + position + "个");
+            int[] locate = new int[2];
+            view.getLocationOnScreen(locate);
+            int[] locate2 = new int[2];
+            view.getLocationInWindow(locate2);
+            MyLog.i("viewweizhiFRAGa","location1 = "+locate[0]+"   ------"+ locate[1]);
+            MyLog.i("viewweizhiFRAGa","location2 = "+locate2[0]+"   ------"+ locate2[1]);
+            MyLog.i("viewweizhiFRAGa","view ---"+view.getLeft()+"----top = "+view.getTop()+"  with="+view.getWidth());
             switch (position) {
                 case 0:
                     Intent intent = new Intent(mContext, SettingActivity.class);

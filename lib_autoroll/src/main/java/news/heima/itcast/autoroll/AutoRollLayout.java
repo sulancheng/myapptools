@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,7 +29,8 @@ import news.heima.itcast.mylibrary.CommenUtils;
  * <p/>
  * 把resource指定的资源加载成View 返回， ViewGroup root指定加载的View挂载到的父容器
  */
-public class AutoRollLayout extends FrameLayout implements ViewPager.OnPageChangeListener {
+public class
+AutoRollLayout extends FrameLayout implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = "AutoRollLayout";
     private ViewPager mViewPager;
@@ -219,12 +221,18 @@ public class AutoRollLayout extends FrameLayout implements ViewPager.OnPageChang
             View view = new View(getContext());
             //点击事件，点击点的时候切换
             view.setOnClickListener(mDotOnClickListener);
-
+            TranslateAnimation translateAnimationX = new TranslateAnimation(0,
+                    0, 0, 0);
             view.setBackgroundResource(R.drawable.selector_dot_bc);
+            //getLayoutParams会获取不到  null
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+//            params.width = dot_size;
+//            params.height = dot_size;
+           // LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dot_size, dot_size);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dot_size, dot_size);//不能getlayparams回报空指针。
             params.rightMargin = dot_size;
-            view.setLayoutParams(params);
-            mDotsView.addView(view);
+           // view.setLayoutParams(params);
+            mDotsView.addView(view,params);
         }
 
     }

@@ -9,12 +9,14 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,7 +31,65 @@ import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 /**
- * Created by 鹤 on 2015/10/29.
+ * 公共方法
+ public void onFinishInflate()
+ 从XML加载完所有子视图后调用。初始化控制视图（调用initControllerView方法，设置事件、绑定控件和设置默认值）。
+
+ public void setAnchorView(View view)
+ 设置MediaController绑定到一个视图上。例如可以是一个VideoView对象，或者是你的activity的主视图。
+ 参数
+ view	可见时绑定的视图
+
+ public void setMediaPlayer(MediaPlayerControl player)
+ 设置媒体播放器。并更新播放/暂停按钮状态。
+
+ public void setInstantSeeking(boolean seekWhenDragging)
+ 设置用户拖拽SeekBar时画面是否跟着变化。（VPlayer默认完成操作后再更新画面）
+
+ public void show()
+ 显示MediaController。默认显示3秒后自动隐藏。
+
+ public void show(int timeout)
+ 显示MediaController。在timeout毫秒后自动隐藏。
+ 参数
+ timeout	超时时间，单位毫秒。为0时控制条的hide()将被调用。
+
+ public void setFileName(String name)
+ 设置视频文件名称。
+
+ public void setInfoView(OutlineTextView v)
+ 设置保存MediaController的操作信息。例如进度改变时更新v。
+
+ public void setAnimationStyle(int animationStyle)
+ 更改MediaController的动画风格。
+ 如果MediaController正在显示，调用此方法将在下一次显示时生效。
+ 参数
+ animationStyle	在MediaController显示或隐藏时使用的动画风格。设置-1为默认风格，0没有动画，或设置一个明确的动画资源。
+
+ public boolean isShowing()
+ 获取MediaController是否已经显示。
+
+ public void hide()
+ 隐藏MediaController。
+
+ public void setOnShownListener(OnShownListener l)
+ 注册一个回调函数，在MediaController显示后被调用。
+
+ public void setOnHiddenListener(OnHiddenListener l)
+ 注册一个回调函数，在MediaController隐藏后被调用。
+
+ public boolean onTouchEvent(MotionEvent event)
+ 调用show()并返回true。
+
+ public boolean onTrackballEvent(MotionEvent ev)
+ 调用show()并返回false。
+
+ public void setEnabled(boolean enabled)
+ 设置MediaController的可用状态。包括进度条和播放/暂停按钮。
+
+ 受保护方法
+ protected View makeControllerView()
+ 创建控制播放的布局视图。子类可重写此方法创建自定义视图。
  */
 public class MyMediaController extends MediaController implements View.OnClickListener {
 
@@ -86,6 +146,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             }
         }
     };
+    private final int controllerheigth;
 
 
     //videoview 用于对视频进行控制的等，activity为了退出
@@ -94,10 +155,16 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         this.context = context;
         this.videoView = videoView;
         this.activity = activity;
-        WindowManager wm = (WindowManager) context
+        WindowManager wm = (WindowManager) activity
                 .getSystemService(Context.WINDOW_SERVICE);
-        controllerWidth = wm.getDefaultDisplay().getWidth();
+
+
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        controllerWidth = outMetrics.widthPixels;
+        controllerheigth = outMetrics.heightPixels;
         mGestureDetector = new GestureDetector(context, new MyGestureListener());
+        setInstantSeeking(true);
     }
 
     @Override
@@ -106,7 +173,6 @@ public class MyMediaController extends MediaController implements View.OnClickLi
        // View v = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(getResources().getIdentifier("mymediacontroller", "layout", getContext().getPackageName()), this);
         v.setMinimumHeight(controllerWidth);
         //TOP
-
         img_back = (ImageButton) v.findViewById(R.id.mediacontroller_top_back);
         img_Battery = (ImageView) v.findViewById(R.id.mediacontroller_imgBattery);
         img_back.setOnClickListener(backListener);
@@ -200,7 +266,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 //                * 希望Activity在横向屏上显示，也就是说横向的宽度要大于纵向的高度，并且忽略方向传感器的影响。
                 //   System.out.println("-----linearLayout_player_nba----false------->>：1" );
                 myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-                title = "xiao";
+                title = "quan";
                 //   LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)linearLayout_player_nba.getLayoutParams();
                 fullscreen = true;//改变全屏/窗口的标记
             } else {//设置RelativeLayout的窗口模式
@@ -208,7 +274,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 //
 //                * 希望Activity在纵向屏幕上显示，但是可以根据方向传感器指示的方向来进行改变。
                 myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-                title = "quan";
+                title = "xiao";
                 fullscreen = false;//改变全屏/窗口的标记
             }
             //myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -219,11 +285,22 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.i("resultdoInBackground",result);
-            if(result.equals("xiao"))
-                textViewTime.setBackgroundResource(R.drawable.xiaopin);
-            else
-                textViewTime.setBackgroundResource(R.drawable.quanpin);
+            View decorView = activity.getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.INVISIBLE);//消除状态栏
+            ViewGroup.LayoutParams lp = videoView.getLayoutParams();
 
+            if(result.equals("quan")) {
+                textViewTime.setBackgroundResource(R.drawable.xiaopin);
+                lp.height = controllerWidth;
+                lp.width = controllerheigth;
+            }
+            else {
+                textViewTime.setBackgroundResource(R.drawable.quanpin);
+                lp.height = (int) (controllerheigth * (1 - 0.618));
+                lp.width = controllerWidth;
+            }
+            videoView.setLayoutParams(lp);
+            decorView.setSystemUiVisibility(View.INVISIBLE);//显示状态栏
         }
     }
 
