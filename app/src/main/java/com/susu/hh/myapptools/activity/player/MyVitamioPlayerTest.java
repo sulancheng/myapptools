@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -118,13 +119,31 @@ public class MyVitamioPlayerTest extends Activity {
         //画面是否拉伸
 //        mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 16/9 );
         registerBoradcastReceiver();
-        MyLog.i("myMediaController",myMediaController.getProgress()+"jja");
-        mHandler.sendEmptyMessageDelayed(TIME,0);
+        MyLog.i("myMediaController", myMediaController.getProgress() + "jja");
+        mHandler.sendEmptyMessageDelayed(TIME, 0);
         //        //开始播放
-        mHandler.sendEmptyMessageDelayed(STARTNOF,2500);
+        mHandler.sendEmptyMessageDelayed(STARTNOF, 2500);
 //        new Thread(this).start();
-    }
 
+        mOrientationListener = new OrientationEventListener(this) {
+            @Override
+            public void onOrientationChanged(int rotation) {
+                //在这里旋转
+//                if (startRotation == -2) {//初始化角度
+//                    startRotation = rotation;
+//                }
+//                //变化角度大于30时，开启自动旋转，并关闭监听
+//                int r = Math.abs(startRotation - rotation);
+//                r = r > 180 ? 360 - r : r;
+//                if (r > 30) {
+//                    //开启自动旋转，响应屏幕旋转事件
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+//                    this.disable();
+//                }
+            }
+        };
+    }
+    private int startRotation =0;
     private void initData() {
         //得到播放地址
         Uri uri = getIntent().getData();//文件夹，图片浏览器，QQ空间
@@ -220,6 +239,7 @@ public class MyVitamioPlayerTest extends Activity {
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
         //END_INCLUDE (set_ui_flags)
     }
+    private OrientationEventListener mOrientationListener; // 屏幕方向改变监听器
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         if (mVideoView != null){

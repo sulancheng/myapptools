@@ -265,9 +265,9 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 //
 //                * 希望Activity在横向屏上显示，也就是说横向的宽度要大于纵向的高度，并且忽略方向传感器的影响。
                 //   System.out.println("-----linearLayout_player_nba----false------->>：1" );
-                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 //                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
-                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                //myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 title = "quan";
                 //   LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)linearLayout_player_nba.getLayoutParams();
                 fullscreen = true;//改变全屏/窗口的标记
@@ -275,12 +275,11 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 //                * ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT：
 //
 //                * 希望Activity在纵向屏幕上显示，但是可以根据方向传感器指示的方向来进行改变。
-                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 //                myVitamioPlayerTest.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
                 title = "xiao";
                 fullscreen = false;//改变全屏/窗口的标记
             }
-
             Log.i("titledoInBackground",title);
             return title;
         }

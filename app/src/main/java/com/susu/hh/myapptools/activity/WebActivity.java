@@ -115,6 +115,7 @@ public class WebActivity  extends SweipeBackActivity{
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 //页面重定向。默认点击webview上面的连接会使用其他的浏览器打开
                 //设置下面的，会在自己页面中 打开
+                MyLog.i("myurl = "+url);
                 mWebView.loadUrl(url);
                 //return super.shouldOverrideUrlLoading(view, url);
                 return false;
@@ -221,7 +222,7 @@ public class WebActivity  extends SweipeBackActivity{
         mWebView.requestFocusFromTouch();
         //Log.i("myhttp",https);
         if(null == https){
-            https ="http://www.baidu.com" ;
+            https ="http://www.917ys.com" ;
         }else {
 
             https ="http://"+ https ;

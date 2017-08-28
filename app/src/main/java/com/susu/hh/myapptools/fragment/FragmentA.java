@@ -18,10 +18,10 @@ import com.susu.hh.myapptools.R;
 import com.susu.hh.myapptools.activity.ChsmallActivity;
 import com.susu.hh.myapptools.activity.DengtexthuaActivity;
 import com.susu.hh.myapptools.activity.DownloadTActivity;
-import com.susu.hh.myapptools.activity.DrawerActivity;
 import com.susu.hh.myapptools.activity.SelectLocalwjActivity;
 import com.susu.hh.myapptools.activity.SettingActivity;
 import com.susu.hh.myapptools.activity.Sliderlayout;
+import com.susu.hh.myapptools.activity.WebActivity;
 import com.susu.hh.myapptools.activity.gridviewtuoz.GridviewTuoz;
 import com.susu.hh.myapptools.adapter.FcfViewGroupAdapter;
 import com.susu.hh.myapptools.adapter.MyJGGridAdapter;
@@ -116,8 +116,8 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
                     startActivity(intent);
                     break;
                 case 1:
-                    //Intent intent1 = new Intent(mContext, SkeyActivity.class);
-                    Intent intent1 = new Intent(mContext, DrawerActivity.class);
+                    Intent intent1 = new Intent(mContext, WebActivity.class);
+                    //Intent intent1 = new Intent(mContext, DrawerActivity.class);
                     startActivity(intent1);
                     break;
                 case 2:
