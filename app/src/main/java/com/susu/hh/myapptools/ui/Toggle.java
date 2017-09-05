@@ -26,10 +26,10 @@ public class Toggle extends RelativeLayout {
 
     public Toggle(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        View view = View.inflate(context, R.layout.view_toggle, null);
+        View view = View.inflate(context, R.layout.view_toggle, this);
 
         //添加到自已里面来
-        this.addView(view);
+        //this.addView(view);
 
         this.setOnClickListener(new OnClickListener() {
             @Override
