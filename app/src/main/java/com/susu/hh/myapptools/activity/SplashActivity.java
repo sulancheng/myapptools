@@ -15,6 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.susu.hh.myapptools.R;
 import com.susu.hh.myapptools.utils.SPUtils;
 
 
@@ -27,9 +28,10 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_splash);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.mRelativeLayout);
         //ViewUtils.inject(this);
-        startAnim();
+        startAnim3();
         //startAnim2();
     }
 
@@ -95,7 +97,7 @@ public class SplashActivity extends Activity {
         animationSet.addAnimation(scaleAnimation);
         animationSet.addAnimation(alphaAnimation);
         animationSet.setDuration(3000);
-        mRelativeLayout.startAnimation(animationSet);
+        //mRelativeLayout.startAnimation(animationSet);
         animationSet.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -111,8 +113,8 @@ public class SplashActivity extends Activity {
                 }else {
                     //intent = new Intent(SplashActivity.this, GuideActivity.class);
                 }
-                startActivity(intent);
-                finish();
+//                startActivity(intent);
+//                finish();
             }
 
             @Override
