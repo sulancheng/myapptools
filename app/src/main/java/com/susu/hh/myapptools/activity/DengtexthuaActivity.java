@@ -1,7 +1,6 @@
 package com.susu.hh.myapptools.activity;
 
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -26,6 +25,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.susu.hh.myapptools.R;
+import com.susu.hh.myapptools.utils.MyLog;
 
 import java.io.File;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
     private Camera.Size mSize = null;//相机的尺寸
     private int mCameraFacing = Camera.CameraInfo.CAMERA_FACING_BACK;//默认后置摄像头
     private static final SparseIntArray orientations = new SparseIntArray();//手机旋转对应的调整角度
-    private LinearLayout zong;
+    //private LinearLayout zong;
     static {
         orientations.append(Surface.ROTATION_0, 90);
         orientations.append(Surface.ROTATION_90, 0);
@@ -54,7 +54,7 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
         super.onCreate(savedInstanceState);
         setWindow();
         setContentView(R.layout.activity_dengtexthua);
-        zong = (LinearLayout) findViewById(R.id.zong);
+       // zong = (LinearLayout) findViewById(R.id.zong);
         init();
         initViews();
 
@@ -70,6 +70,20 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
                     startRecord();
                 } else {
                     stopRecord();
+                }
+            }
+        });
+        //自动聚焦
+        mSurfaceView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mCamera!=null){
+                    mCamera.autoFocus(new Camera.AutoFocusCallback() {
+                        @Override
+                        public void onAutoFocus(boolean success, Camera camera) {
+                            MyLog.i("聚焦成功");
+                        }
+                    });
                 }
             }
         });
@@ -124,6 +138,7 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
     }
     //使得画面不被拉伸
     private void setCameraParams(Camera camera, int width, int height) {
+        height = height-120;
         Camera.Parameters parameters = camera.getParameters();
         // 获取摄像头支持的PictureSize列表
         List<Camera.Size> pictureSizeList = parameters.getSupportedPictureSizes();
@@ -361,12 +376,12 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
         sa.setDuration(2000);
         Log.i("init","view1 = "+view1+" view2="+view2);
         //TranslateAnimation ta=new TranslateAnimation(view1,0.5f , view2, 0.5f);
-        ObjectAnimator animX = ObjectAnimator.ofFloat(zong, "translationX",
-                view1, 0.5f);
-        ObjectAnimator animY = ObjectAnimator.ofFloat(zong, "translationY",
-                view2, 0.5f);
+       // ObjectAnimator animX = ObjectAnimator.ofFloat(zong, "translationX",
+         //       view1, 0.5f);
+        //ObjectAnimator animY = ObjectAnimator.ofFloat(zong, "translationY",
+        //        view2, 0.5f);
         AnimatorSet animSetXY = new AnimatorSet();
-        animSetXY.playTogether(animX,animY);
+        //animSetXY.playTogether(animX,animY);
         animSetXY.setDuration(1500);
 //        ObjectAnimator animator = ObjectAnimator.ofFloat(zong, "translationX", 0, 200, -200,0);
 //        animator.setDuration(2000);
@@ -378,7 +393,7 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
         set.addAnimation(sa);
        // set.addAnimation(ta);
         set.addAnimation(an);
-        zong.startAnimation(set);
+        //zong.startAnimation(set);
         animSetXY.start();
     }
 }
