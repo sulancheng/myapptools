@@ -22,4 +22,27 @@
 
     <color name="white">#FFFFFF</color>
     <color name="orange_ff6633">#ff6633</color>
+
+    <color name="login_blue">#303F9F</color>
+    <color name="login_pre">#50303F9F</color>
+    <color name="login_gs">#80303F9F</color>
+    <color name="login_bluetwo">#3F51B5</color>
+    <color name="lighter_gray">#ddd</color>
+    <color name="lighter_grayt">#30dddddd</color>
+    <color name="lighter_gray_pre">#50dddddd</color>
+    <color name="green">#81cb0b</color>
+    <color name="green_ore">#5081cb0b</color>
+    <color name="yellow">#f39800</color>
+    <color name="yellow_ore">#50f39800</color>
+    <color name="sign_out">#007eff</color>
+    <color name="sign_out_pre">#55007eff</color>
+    <color name="press_info">#dedede</color>
+    <color name="myblack">#000</color>
+    <color name="myblackthree">#333333</color>
+    <color name="mygradle">#20dedede</color>
+    <color name="myred">#fe0000</color>
+    <color name="mygreen">#0cad00</color>
+    <color name="pinlunred">#d8271c</color>
+    <color name="my_grard">#4b4b4b</color>
+    <color name="setting_bc">#eaeaea</color>
 </resources>

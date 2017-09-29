@@ -96,7 +96,6 @@ public class AddressDialog extends Dialog implements OnItemClickListener {
 			tv_text.setText(items[position]);
 			return commentViewHolder.convertView;
 		}
-
 	}
 
 	/*@Override

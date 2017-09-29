@@ -21,9 +21,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
     compile project(':slidingmenu_library')
     compile project(':lib_zxing')
     compile project(':lib_autoroll')
@@ -31,6 +28,11 @@ dependencies {
     compile project(':vitamios')
     compile project(':seach_library')
     //个性化进度条
+    //各种输入法
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
     compile 'com.daimajia.numberprogressbar:library:1.4@aar'
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'//各种输入法
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
 }
