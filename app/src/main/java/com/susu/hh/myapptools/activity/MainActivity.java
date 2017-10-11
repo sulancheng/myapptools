@@ -99,6 +99,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         initRightAndLeftMenu();
         // 初始化ViewPager
         initViewPager();
+        CommenUtils.getnumber("aagggbbccchhhhh");
 
     }
 
