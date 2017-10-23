@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -249,6 +250,23 @@ public class MyVitamioPlayerTest extends Activity {
         super.onConfigurationChanged(newConfig);
         int layoutDirection = newConfig.orientation;
         Log.i("onConfigurationChanged",layoutDirection+"");
+        if(layoutDirection == Configuration.ORIENTATION_LANDSCAPE){
+            //横屏
+            myMediaController.title = "quan";
+            myMediaController.fullscreen = true;
+        }else {
+            myMediaController.title = "xiao";
+            myMediaController.fullscreen = false;
+        }
+        if(layoutDirection!=ActivityInfo.SCREEN_ORIENTATION_SENSOR){
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+                }
+            },6000);
+        }
+        //Configuration.ORIENTATION_LANDSCAPE;
 //        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 //            //当前为横屏， 在此处添加额外的处理代码
 //            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);//随着用户的使用变化

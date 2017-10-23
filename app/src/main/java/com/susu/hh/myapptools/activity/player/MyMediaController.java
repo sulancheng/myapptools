@@ -238,9 +238,9 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         }
 
     }
-
+    public String title;
     //关于横竖吧切换
-    private boolean fullscreen = false;
+    public boolean fullscreen = false;
     public class MyClickTask extends AsyncTask<String,Integer,String> {
         @Override
         protected void onPreExecute() {
@@ -255,8 +255,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         @Override
         protected String doInBackground(String... params) {
             //String path = params[0];
-            String title;
-            MyVitamioPlayerTest myVitamioPlayerTest = (MyVitamioPlayerTest) MyMediaController.this.context;
+
             if (!fullscreen) {//设置RelativeLayout的全屏模式
 //                * ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE：
 //
