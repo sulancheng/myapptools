@@ -43,7 +43,7 @@ import news.heima.itcast.autoroll.RollItem;
 public class FragmentA extends BaseFragment implements AdapterView.OnItemClickListener {
     private MyJGGridAdapter myGridAdapter;
     public String[] img_text = {"转账", "余额宝", "手机充值", "信用卡还款", "淘宝电影", "彩票",
-            "当面付", "亲密付", "机票"};
+            "当面付", "亲密付"};
     String[] titledatas = {"朝辞白帝彩云间", "千里江陵一日还", "两岸猿声啼不住", "轻舟已过万重山"};
     public int[] imgs = {R.drawable.app_transfer, R.drawable.app_fund,
             R.drawable.app_phonecharge, R.drawable.app_creditcard,
