@@ -275,7 +275,6 @@ public class DragGrid extends GridView {
 
 			@Override
 			public void onAnimationStart(Animator animation) {
-				// TODO Auto-generated method stub
 				DragAdapter adapter = (DragAdapter)getAdapter();
 				//一点击马上将对应位置隐藏
 				adapter.setHidePosition(position);
@@ -398,7 +397,6 @@ public class DragGrid extends GridView {
 		View aimView = getChildAt(aimPosit);
 		int endx = aimView.getLeft();
 		int endy = aimView.getTop();
-
 		ObjectAnimator animX = ObjectAnimator.ofFloat(animView, "translationX",
 				startx, endx);
 		ObjectAnimator animY = ObjectAnimator.ofFloat(animView, "translationY",

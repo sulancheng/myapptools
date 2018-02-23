@@ -53,22 +53,22 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
     private SearchAdapter mSearchAdapter;
     private ProgressBar pb_loading;
     private TextView tv_nomedia;
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            MyLog.i("mediaItemfragmentD", "msg.what = "+msg.what);
-            switch (msg.what){
+            MyLog.i("mediaItemfragmentD", "msg.what = " + msg.what);
+            switch (msg.what) {
                 case 100:
-                    if(videoPagerAdapter == null){
+                    if (videoPagerAdapter == null) {
                         //有数据
                         //设置适配器
-                        videoPagerAdapter = new NetVideoPagerAdapter(mContext,mediaItems);
+                        videoPagerAdapter = new NetVideoPagerAdapter(mContext, mediaItems);
                         listview.setEmptyView(pb_loading);
                         listview.setAdapter(null);
                         listview.setAdapter(videoPagerAdapter);
                         videoPagerAdapter.notifyDataSetChanged();
-                        MyLog.i("mediaItemfragmentD", "videoPagerAdapter = "+msg.what);
+                        MyLog.i("mediaItemfragmentD", "videoPagerAdapter = " + msg.what);
                     }
                     break;
                 case 101:
@@ -81,14 +81,14 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
     private List<SearchBean.ItemData> items;
 
     private void showData() {
-        if(mSearchAdapter == null){
-            if(items != null&&items.size() > 0){
-                mSearchAdapter = new SearchAdapter(mContext,items);
+        if (mSearchAdapter == null) {
+            if (items != null && items.size() > 0) {
+                mSearchAdapter = new SearchAdapter(mContext, items);
                 listview.setEmptyView(pb_loading);
                 listview.setAdapter(null);
                 listview.setAdapter(mSearchAdapter);
                 mSearchAdapter.notifyDataSetChanged();
-            }else {
+            } else {
                 pb_loading.setVisibility(View.GONE);
             }
         }
@@ -99,7 +99,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MyLog.i("FragmentD","FragmentD调用了");
+        MyLog.i("FragmentD", "FragmentD调用了");
         View inflated = inflater.inflate(R.layout.fragment_fragment_d, container, false);
         return inflated;
     }
@@ -129,16 +129,16 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
         search.enableVoiceRecognition(this);
         search.setEnabled(false);
         search.toggleSearchclose();
-        if(items !=null && items.size()>0){
+        if (items != null && items.size() > 0) {
             showData();
-        }else {
+        } else {
             seachfoNetwork("");
         }
-        for(int x = 0; x < 10; x++){
+        for (int x = 0; x < 10; x++) {
             SearchResult option = new SearchResult("本人好帅 " + Integer.toString(x), getResources().getDrawable(R.drawable.ic_history));
             search.addSearchable(option);
         }
-        search.setMenuListener(new SearchBox.MenuListener(){
+        search.setMenuListener(new SearchBox.MenuListener() {
 
             @Override
             public void onMenuClick() {
@@ -148,7 +148,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
             }
 
         });
-        search.setSearchListener(new SearchBox.SearchListener(){
+        search.setSearchListener(new SearchBox.SearchListener() {
 
             @Override
             public void onSearchOpened() {
@@ -167,7 +167,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
             @Override
             public void onSearch(String searchTerm) {
                 //点击查找之后
-                Toast.makeText(FragmentD.this.mContext, searchTerm +" Searched", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FragmentD.this.mContext, searchTerm + " Searched", Toast.LENGTH_SHORT).show();
                 seachfoNetwork(searchTerm);
                 pb_loading.setVisibility(View.VISIBLE);
             }
@@ -199,17 +199,19 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
 
         listview.setOnItemClickListener(this);
     }
-    private  String tname;
+
+    private String tname;
+
     private void seachfoNetwork(String name) {
         String url = null;
         this.tname = name;
 
         try {
             String text = URLEncoder.encode(name, "UTF-8");
-            if("".equals(name)){
+            if ("".equals(name)) {
                 url = VolleyEngine.NET_URL;
-            }else {
-                url = VolleyEngine.SEARCH_URL+text;
+            } else {
+                url = VolleyEngine.SEARCH_URL + text;
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -217,10 +219,11 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
         MyLog.i("onResponse", url);
         VolleyEngine.getInstance().jsonObjRequest(url, null, new Response.Listener<JSONObject>() {
             private Gson gson;
+
             @Override
             public void onResponse(JSONObject jsonObject) {
                 MyLog.i("onResponse", jsonObject.toString());
-                if("".equals(tname)){
+                if ("".equals(tname)) {
                     //json太长了  去部分的来比较简单
                     //MediaRespond mediaRespond = gson.fromJson(jsonObject.toString(), MediaRespond.class);
                     try {
@@ -229,7 +232,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 //获取第i个数组元素
                                 JSONObject jsonObjectItem = (JSONObject) jsonArray.get(i);
-                                if(jsonObjectItem!=null){
+                                if (jsonObjectItem != null) {
                                     //下面方法时保留所有的属性，bean没有  只有部分
                                     // MediaItem mediaItem = gson.fromJson(jsonObject.toString(), MediaItem.class);
                                     MediaItem mediaItem = new MediaItem();
@@ -256,7 +259,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
                         Toast.makeText(FragmentD.this.mContext, "网路错误!", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     gson = new Gson();
                     searchBean = gson.fromJson(jsonObject.toString(), SearchBean.class);
                     items = searchBean.getItems();
@@ -276,20 +279,21 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //3.传递列表数据-对象-序列化
-        Intent intent = new Intent(mContext,MyVitamioPlayerTest.class);
+        Intent intent = new Intent(mContext, MyVitamioPlayerTest.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("videolist",mediaItems);
+        bundle.putSerializable("videolist", mediaItems);
         intent.putExtras(bundle);
-        intent.putExtra("position",position);
+        intent.putExtra("position", position);
         mContext.startActivity(intent);
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (isAdded() && requestCode == SearchBox.VOICE_RECOGNITION_CODE && resultCode == getActivity().RESULT_OK) {
             ArrayList<String> matches = data
                     .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            MyLog.i("fragmentd activity",matches.toString());
+            MyLog.i("fragmentd activity", matches.toString());
             search.populateEditText(matches.get(0));
         }
         super.onActivityResult(requestCode, resultCode, data);

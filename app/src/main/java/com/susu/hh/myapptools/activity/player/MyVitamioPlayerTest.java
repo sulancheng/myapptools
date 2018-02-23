@@ -115,6 +115,7 @@ public class MyVitamioPlayerTest extends Activity {
         myMediaController = new MyMediaController(this, mVideoView, this);
         mMediaController.show(5000);
         mVideoView.setMediaController(myMediaController);
+//        mVideoView.setMediaController(myMediaController);
         mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//高画质
         mVideoView.requestFocus();
         //画面是否拉伸
