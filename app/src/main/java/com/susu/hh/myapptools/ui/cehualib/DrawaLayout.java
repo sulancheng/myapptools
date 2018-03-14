@@ -186,6 +186,10 @@ public class DrawaLayout extends FrameLayout {
 
         //在ViewDragHelper对拖拽事件就行拦截的时候：会根据这个方法返回的值来决定是否拦截拖拽事件
         //mViewDragHelper.shouldInterceptTouchEvent(ev);
+       /* 需要注意的地方：如果ViewGroup的子控件会消耗点击事件，例如按钮，
+        在触摸屏幕的时候就会先走onInterceptTouchEvent方法，判断是否可以捕获，
+        而在判断的过程中会去判断另外两个回调的方法：getViewHorizontalDragRange和getViewVerticalDragRange，只有这两个方法返回大于0的值才能正常的捕获。*/
+
         @Override
         public int getViewHorizontalDragRange(View child) {
 
@@ -230,7 +234,7 @@ public class DrawaLayout extends FrameLayout {
         // dx拖拽移动的值
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-
+            Log.i("变化的数据","changedView=="+(changedView==mMenuView)+"  left="+left+"   dx="+dx);
             if (changedView == mMenuView) {
 
                 //菜单应该位置限制：不可以移动
