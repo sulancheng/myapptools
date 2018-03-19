@@ -39,7 +39,6 @@ public class MainPanleLayout extends LinearLayout {
             //单击的时候：关闭菜单
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
-
                 if (mCallback != null) {
 
                     mCallback.closeLeftMenu();

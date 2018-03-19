@@ -310,7 +310,8 @@ public class DrawaLayout extends FrameLayout {
         Log.i("mainPanleScaleValuetwo","percent = "+percent);
         Log.i("mainPanleScaleValuetwo","mainPanleScaleValuetwo = "+mainPanleScaleValuetwo);
         //ObjectAnimator animator = ObjectAnimator.ofFloat(mMainPanle,"rotationY",0,mainPanleScaleValuetwo);
-        mMainPanle.setRotationY(mainPanleScaleValuetwo);
+        //mMainPanle.setRotationY(mainPanleScaleValuetwo);//ok
+        ViewCompat.setRotationY(mMainPanle,mainPanleScaleValuetwo);
         //animator.setDuration(100);
         //animator.start();
         // 菜单：   缩放    0.5---->1

@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="#fff"
+        android:text="你妹的达到"
         android:ellipsize="end"
         android:maxLines="1" />
 
