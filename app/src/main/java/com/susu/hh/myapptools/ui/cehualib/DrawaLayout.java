@@ -377,6 +377,11 @@ public class DrawaLayout extends FrameLayout {
         //public boolean continueSettling(boolean deferCallbacks)
         //@return true if settle is still in progress
         //如果返回true动画还没有走完，需要继续调用这个方法continueSettling
+        /**
+         * 看源码 smoothSlideViewTo与settleCapturedViewAt最终都是调用forceSettleCapturedViewAt  而forceSettleCapturedViewAt
+         * 最终都是调用mScroller.startScroll 进行滑动  computeScroll会被回调continueSettling里面是boolean keepGoing = mScroller.computeScrollOffset();
+         * 来判断是否已经滑动到位。
+         * */
         if (mViewDragHelper.smoothSlideViewTo(mMainPanle, mMaxDragRange, 0)) {
 
             //while (mViewDragHelper.continueSettling(false)) ;
