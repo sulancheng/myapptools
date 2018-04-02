@@ -250,16 +250,19 @@ public class MyVitamioPlayerTest extends Activity {
 
         super.onConfigurationChanged(newConfig);
         int layoutDirection = newConfig.orientation;
-        Log.i("onConfigurationChanged",layoutDirection+"");
-        if(layoutDirection == Configuration.ORIENTATION_LANDSCAPE){
+        Log.i("onConfigurationChanged",layoutDirection+"   getRequestedOrientation="+getRequestedOrientation());
+        if(layoutDirection == Configuration.ORIENTATION_LANDSCAPE){//横着是2
             //横屏
             myMediaController.title = "quan";
             myMediaController.fullscreen = true;
+//            setRequestedOrientation
+//                    (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }else {
+            //否则就是1  也就是竖屏
             myMediaController.title = "xiao";
             myMediaController.fullscreen = false;
         }
-        if(layoutDirection!=ActivityInfo.SCREEN_ORIENTATION_SENSOR){
+        if(layoutDirection!= ActivityInfo.SCREEN_ORIENTATION_SENSOR){
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
