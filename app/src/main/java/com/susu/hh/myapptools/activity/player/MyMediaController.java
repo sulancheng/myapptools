@@ -10,13 +10,11 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -99,7 +97,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     private GestureDetector mGestureDetector;
     private ImageButton img_back;//返回键
     private ImageView img_Battery;//电池电量显示
-    private ImageButton textViewTime;//时间提示
+    public ImageButton textViewTime;//时间提示
     private TextView textViewBattery,mediacontroller_file_name;//文字显示电池
     private VideoView videoView;
     private Activity activity;
@@ -209,6 +207,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         // 处理手势结束
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
+                type=0;
                 endGesture();
                 if (progress_turn) {
                     onFinishSeekBar();
@@ -279,33 +278,34 @@ public class MyMediaController extends MediaController implements View.OnClickLi
                 title = "xiao";
                 fullscreen = false;//改变全屏/窗口的标记
             }
-            Log.i("titledoInBackground",title);
             return title;
         }
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.i("resultdoInBackground",result);
-            View decorView = activity.getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.INVISIBLE);//消除状态栏
-            ViewGroup.LayoutParams lp = videoView.getLayoutParams();
-
-            if(result.equals("quan")) {
-                textViewTime.setBackgroundResource(R.drawable.xiaopin);
-                lp.height = controllerWidth;
-                lp.width = controllerheigth+200;
+            if (videoView != null){
+                videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);//工具自己测量横竖屏  成功
             }
-            else {
-                textViewTime.setBackgroundResource(R.drawable.quanpin);
-                lp.height = (int) (controllerheigth * (1 - 0.618));
-                lp.width = controllerWidth;
-            }
-            videoView.setLayoutParams(lp);
-            decorView.setSystemUiVisibility(View.INVISIBLE);//显示状态栏
+//            View decorView = activity.getWindow().getDecorView();
+//            decorView.setSystemUiVisibility(View.INVISIBLE);//消除状态栏
+//            ViewGroup.LayoutParams lp = videoView.getLayoutParams();
+//
+//            if(result.equals("quan")) {
+//                textViewTime.setBackgroundResource(R.drawable.xiaopin);
+//                lp.height = controllerWidth;
+//                lp.width = controllerheigth+200;
+//            }
+//            else {
+//                textViewTime.setBackgroundResource(R.drawable.quanpin);
+//                lp.height = (int) (controllerheigth * (1 - 0.618));
+//                lp.width = controllerWidth;
+//            }
+//            videoView.setLayoutParams(lp);
+//            decorView.setSystemUiVisibility(View.INVISIBLE);//显示状态栏
         }
     }
 
-
+    private int type= 0;//优化滑动改变进度 改变亮度的问题
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
@@ -337,13 +337,19 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             disp.getSize(size);
             int windowWidth = size.x;
             int windowHeight = size.y;
-            if (Math.abs(endX - beginX) < Math.abs(beginY - endY)) {//上下滑动
+            if (type==1||(Math.abs(endX - beginX) < Math.abs(beginY - endY))) {//上下滑动
+                if (type==2){
+                    onSeekTo((endX - beginX) / 20);
+                    return super.onScroll(e1, e2, distanceX, distanceY);
+                }
                 if (beginX > windowWidth * 3.0 / 4.0) {// 右边滑动 屏幕3/5
                     onVolumeSlide((beginY - endY) / windowHeight);
                 } else if (beginX < windowWidth * 1.0 / 4.0) {// 左边滑动 屏幕2/5
                     onBrightnessSlide((beginY - endY) / windowHeight);
                 }
+                type=1;
             }else {
+                type=2;
                 onSeekTo((endX - beginX) / 20);
             }
             return super.onScroll(e1, e2, distanceX, distanceY);

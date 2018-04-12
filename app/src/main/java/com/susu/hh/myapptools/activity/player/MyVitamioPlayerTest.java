@@ -255,12 +255,14 @@ public class MyVitamioPlayerTest extends Activity {
             //横屏
             myMediaController.title = "quan";
             myMediaController.fullscreen = true;
+            myMediaController.textViewTime.setBackgroundResource(R.drawable.xiaopin);
 //            setRequestedOrientation
 //                    (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }else {
             //否则就是1  也就是竖屏
             myMediaController.title = "xiao";
             myMediaController.fullscreen = false;
+            myMediaController.textViewTime.setBackgroundResource(R.drawable.quanpin);
         }
         if(layoutDirection!= ActivityInfo.SCREEN_ORIENTATION_SENSOR){
             mHandler.postDelayed(new Runnable() {

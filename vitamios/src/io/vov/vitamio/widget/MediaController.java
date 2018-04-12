@@ -261,7 +261,7 @@ public class MediaController extends FrameLayout {
     mWindow.setOutsideTouchable(true);
     mAnimStyle = android.R.style.Animation;
   }
-  
+
   @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	public void setWindowLayoutType() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
