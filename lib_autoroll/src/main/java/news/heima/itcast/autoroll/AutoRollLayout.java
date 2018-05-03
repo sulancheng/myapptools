@@ -107,11 +107,11 @@ AutoRollLayout extends FrameLayout implements ViewPager.OnPageChangeListener {
 
                 //手指按下的时候暂停轮播
                 if (action == MotionEvent.ACTION_DOWN) {
-
+                    CommenUtils.getHandler().removeCallbacks(mAutoTask);
                     mTapInTouch = true;
                     //当手指抬起的时候继续轮播
                 } else if (action == MotionEvent.ACTION_UP) {
-
+                    CommenUtils.getHandler().postDelayed(mAutoTask, 2000);
                     mTapInTouch = false;
                 }
 

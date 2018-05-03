@@ -98,7 +98,13 @@ public class FragmentB extends BaseFragment {
         MyLog.i("FragmentB","本地视频的数据被初始化了。。。");
         //加载本地视频数据
         getDataFromLocal();
+        getDataFromSpringboot();
     }
+
+    private void getDataFromSpringboot() {
+
+    }
+
     /**
      * 从本地的sdcard得到数据
      * //1.遍历sdcard,后缀名
