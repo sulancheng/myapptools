@@ -1,1 +1,1 @@
-include ':app', ':slidingmenu_library', ':lib_zxing', ':mylibrary', ':lib_autoroll', ':vpi-library', ':lib-fcf', ':vitamios', ':seach_library', ':okgo'
+include ':app', ':slidingmenu_library', ':lib_zxing', ':mylibrary', ':lib_autoroll', ':vpi-library', ':lib-fcf', ':vitamios', ':seach_library', ':okgo', ':apphuahua'
