@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Xfermode;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -261,7 +262,7 @@ public class PaletteView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mBufferBitmap != null) {
-            canvas.drawBitmap(mBufferBitmap, 0, 0, null);
+            canvas.drawBitmap(mBufferBitmap, 0, 0, null); //创建备份图片
         }
     }
 
@@ -273,6 +274,8 @@ public class PaletteView extends View {
         }
         final int action = event.getAction() & MotionEvent.ACTION_MASK;
         final float x = event.getX();
+        Log.i("触摸的点","x="+event.getX()+" y="+event.getY());
+        Log.i("触摸的点","rx="+event.getRawX()+" ry="+event.getRawY());
         final float y = event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
