@@ -273,10 +273,10 @@ public class PaletteView extends View {
             return false;
         }
         final int action = event.getAction() & MotionEvent.ACTION_MASK;
-        final float x = event.getX();
+        float x = event.getX();
         Log.i("触摸的点","x="+event.getX()+" y="+event.getY());
         Log.i("触摸的点","rx="+event.getRawX()+" ry="+event.getRawY());
-        final float y = event.getY();
+        float y = event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 mLastX = x;
@@ -288,7 +288,8 @@ public class PaletteView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 //这里终点设为两点的中心点的目的在于使绘制的曲线更平滑，如果终点直接设置为x,y，效果和lineto是一样的,实际是折线效果
-                mPath.quadTo(mLastX, mLastY, (x + mLastX) / 2, (y + mLastY) / 2);
+//                mPath.quadTo(mLastX, mLastY, (x + mLastX) / 2, (y + mLastY) / 2);
+                mPath.quadTo(mLastX, mLastY, x , y);
                 if (mBufferBitmap == null) {
                     initBuffer();
                 }

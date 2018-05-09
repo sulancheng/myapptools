@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -104,9 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (bmp == null) {
             return null;
         }
-        File appDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        if (appDir == null) {
-            return null;
+        String mylog = BitmapUtil.getDpath("huahua");
+        File appDir = new File(mylog);
+        if (!appDir.exists()) {
+            appDir.mkdirs();
         }
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(appDir, fileName);

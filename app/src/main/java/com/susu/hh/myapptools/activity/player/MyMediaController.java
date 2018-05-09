@@ -324,7 +324,6 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             progress = getProgress();
             return true;
         }
-
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             float beginX = e1.getX();
