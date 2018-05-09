@@ -265,10 +265,10 @@ public class PaletteView extends View {
             canvas.drawBitmap(mBufferBitmap, 0, 0, null); //创建备份图片  canvas 只要invalidate就会重新绘制，之前的会删除。
         }
     }
-
     @SuppressWarnings("all")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.i("touchMainActivity","onTouchEvent");
         if(!isEnabled()){
             return false;
         }

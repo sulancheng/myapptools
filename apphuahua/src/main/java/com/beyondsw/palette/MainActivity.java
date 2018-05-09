@@ -57,6 +57,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRedoView.setEnabled(false);
 
         mHandler = new Handler(this);
+//        mPaletteView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.i("touchMainActivity","onTouch");
+//                return true;//优先级高于view的onTouchEvent 返回true消费事件。
+//            }
+//        });
     }
 
     @Override
