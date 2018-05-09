@@ -209,7 +209,7 @@ public class PaletteView extends View {
                 mCanEraser = false;
             }
             mRemovedList.add(info);
-            reDraw();
+            reDraw(); //取出最后画的，将剩下的重绘。
             if (mCallback != null) {
                 mCallback.onUndoRedoStatusChanged();
             }
