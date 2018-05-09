@@ -262,7 +262,7 @@ public class PaletteView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mBufferBitmap != null) {
-            canvas.drawBitmap(mBufferBitmap, 0, 0, null); //创建备份图片
+            canvas.drawBitmap(mBufferBitmap, 0, 0, null); //创建备份图片  canvas 只要invalidate就会重新绘制，之前的会删除。
         }
     }
 
@@ -297,6 +297,8 @@ public class PaletteView extends View {
                     break;
                 }
                 mBufferCanvas.drawPath(mPath,mPaint);
+//                mBufferCanvas.save();
+//                mBufferCanvas.restore();
                 invalidate();
                 mLastX = x;
                 mLastY = y;
