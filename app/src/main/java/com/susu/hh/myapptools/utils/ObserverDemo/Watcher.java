@@ -6,5 +6,5 @@ package com.susu.hh.myapptools.utils.ObserverDemo;
  */
 
 public interface Watcher {
-    void Discover(String s);//好像发现了什么
+    void discover(String s);//好像发现了什么
 }

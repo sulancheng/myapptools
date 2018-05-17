@@ -10,5 +10,5 @@ public interface Mistakable {
 
     void dele(Watcher watcher);
 
-    void steal(String s);//搞事  触发
+    void steal(String s,Watcher mywatcher);//搞事  触发
 }

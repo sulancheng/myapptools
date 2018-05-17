@@ -15,13 +15,13 @@ public class ObserTestActivity extends AppCompatActivity implements Watcher {
 
     }
     private void doSomeThing() {
-        ObseaverBean instener = ObseaverBean.getInstener();
+        ObseaverBaseBean instener = ObseaverBaseBean.getInstener();
         instener.add(this);
-        instener.steal("偷到了一台三桑note7");//开始搞事了
+        instener.steal("偷到了一台三桑note7",null);//开始搞事了
     }
 
     @Override
-    public void Discover(String s) {
+    public void discover(String s) {
         //做想做的事情。
     }
 }
