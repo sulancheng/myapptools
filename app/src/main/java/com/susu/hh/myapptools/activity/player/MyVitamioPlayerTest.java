@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,10 +27,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.VideoView;
+import master.flame.danmaku.controller.DrawHandler;
+import master.flame.danmaku.danmaku.model.BaseDanmaku;
+import master.flame.danmaku.danmaku.model.DanmakuTimer;
+import master.flame.danmaku.danmaku.model.IDanmakus;
+import master.flame.danmaku.danmaku.model.android.DanmakuContext;
+import master.flame.danmaku.danmaku.model.android.Danmakus;
+import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
+import master.flame.danmaku.ui.widget.DanmakuView;
 
 public class MyVitamioPlayerTest extends Activity {
 
@@ -45,7 +55,7 @@ public class MyVitamioPlayerTest extends Activity {
 
     private static final int TIME = 0;
     private static final int BATTERY = 1;
-
+    private boolean showDanmaku;
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -72,10 +82,15 @@ public class MyVitamioPlayerTest extends Activity {
         }
     };
     private int progress;
+    private DanmakuView danmakuView;
+    private DanmakuContext danmakuContext;
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (danmakuView != null && danmakuView.isPrepared() && danmakuView.isPaused()) {
+            danmakuView.resume();
+        }
         if (myMediaController != null) {
             mHandler.sendEmptyMessageDelayed(SETPROGRESS, 300);
         }
@@ -84,6 +99,9 @@ public class MyVitamioPlayerTest extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (danmakuView != null && danmakuView.isPrepared()) {
+            danmakuView.pause();
+        }
         if (myMediaController != null) {
             progress = myMediaController.getProgress();
             mVideoView.pause();
@@ -106,6 +124,7 @@ public class MyVitamioPlayerTest extends Activity {
         setContentView(R.layout.activity_vedio_test);
         mVideoView = (VideoView) findViewById(R.id.surface_view);
         initData();
+        initdanmu();
 //        mMediaController = new MediaController(this);
         myMediaController = new MyMediaController(this, mVideoView, this);
         myMediaController.show(5000);
@@ -123,6 +142,93 @@ public class MyVitamioPlayerTest extends Activity {
 //        mHandler.sendEmptyMessageDelayed(STARTNOF, 2500);
 
     }
+
+    private void initdanmu() {
+        danmakuView = (DanmakuView) findViewById(R.id.danmaku_view);
+        danmakuView.enableDanmakuDrawingCache(true);
+        danmakuView.setCallback(new DrawHandler.Callback() {
+            @Override
+            public void prepared() {
+                showDanmaku = true;
+                danmakuView.start();
+                generateSomeDanmaku();
+            }
+
+            @Override
+            public void updateTimer(DanmakuTimer timer) {
+
+            }
+
+            @Override
+            public void danmakuShown(BaseDanmaku danmaku) {
+
+            }
+
+            @Override
+            public void drawingFinished() {
+
+            }
+        });
+        danmakuContext = DanmakuContext.create();
+        danmakuView.prepare(parser, danmakuContext);
+    }
+    private BaseDanmakuParser parser = new BaseDanmakuParser() {
+        @Override
+        protected IDanmakus parse() {
+            return new Danmakus();
+        }
+    };
+    /**
+     * 向弹幕View中添加一条弹幕
+     * @param content
+     *          弹幕的具体内容
+     * @param  withBorder
+     *          弹幕是否有边框
+     */
+    private void addDanmaku(String content, boolean withBorder) {
+        BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
+        danmaku.text = content;
+        danmaku.padding = 5;
+        danmaku.textSize = sp2px(20);
+        danmaku.textColor = Color.RED;
+        danmaku.setTime(danmakuView.getCurrentTime());
+        if (withBorder) {
+            danmaku.borderColor = Color.GREEN;
+        }
+        danmakuView.addDanmaku(danmaku);
+    }
+
+    /**
+     * 随机生成一些弹幕内容以供测试
+     */
+    private void generateSomeDanmaku() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(showDanmaku) {
+                    int time = new Random().nextInt(300);
+                    String content = "" + time + time;
+                    addDanmaku(content, false);
+                    try {
+                        Thread.sleep(time);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * sp转px的方法。
+     */
+    public int sp2px(float spValue) {
+        final float fontScale = getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+
+
 
     private void setlistener() {
         //准备好的监听
@@ -200,6 +306,11 @@ public class MyVitamioPlayerTest extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        showDanmaku = false;
+        if (danmakuView != null) {
+            danmakuView.release();
+            danmakuView = null;
+        }
         //移除所有的消息
         mHandler.removeCallbacksAndMessages(null);
         try {

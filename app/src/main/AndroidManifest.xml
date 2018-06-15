@@ -274,7 +274,8 @@
         <activity
             android:name=".activity.player.MyVitamioPlayerTest"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".activity.GoBackMia" />
         <activity
             android:name=".activity.Sliderlayout"
