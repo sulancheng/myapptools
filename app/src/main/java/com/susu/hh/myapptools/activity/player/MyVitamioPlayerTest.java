@@ -40,6 +40,14 @@ import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.model.android.Danmakus;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
+/*
+* 在这里写有关于视频列表的问题，在阿里云播放端有例子，原理就是利用texttureview的实习替换
+*
+* 实际中有很牛的第三方框架管理 https://github.com/danylovolokh/VideoPlayerManager 实现列表切换自动播放
+* 下面是使用的例子：
+*   https://www.cnblogs.com/You0/p/5716266.html
+*
+* */
 
 public class MyVitamioPlayerTest extends Activity {
 
