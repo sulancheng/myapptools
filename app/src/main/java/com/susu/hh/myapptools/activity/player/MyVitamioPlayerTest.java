@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.susu.hh.myapptools.R;
@@ -92,6 +93,7 @@ public class MyVitamioPlayerTest extends Activity {
     private int progress;
     private DanmakuView danmakuView;
     private DanmakuContext danmakuContext;
+    private LinearLayout ll_list;
 
     @Override
     protected void onResume() {
@@ -135,6 +137,8 @@ public class MyVitamioPlayerTest extends Activity {
         initdanmu();
 //        mMediaController = new MediaController(this);
         myMediaController = new MyMediaController(this, mVideoView, this);
+        ll_list = (LinearLayout) findViewById(R.id.ll_list);
+
         myMediaController.show(5000);
 //        mMediaController.show(5000);
         mVideoView.setMediaController(myMediaController);
@@ -404,12 +408,14 @@ public class MyVitamioPlayerTest extends Activity {
         Log.i("onConfigurationChanged", layoutDirection + "   getRequestedOrientation=" + getRequestedOrientation());
         if (layoutDirection == Configuration.ORIENTATION_LANDSCAPE) {//横着是2
             //横屏
+            ll_list.setVisibility(View.GONE);
             myMediaController.title = "quan";
             myMediaController.fullscreen = true;
             myMediaController.textViewTime.setBackgroundResource(R.drawable.xiaopin);
 //            setRequestedOrientation
 //                    (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
+            ll_list.setVisibility(View.VISIBLE);
             //否则就是1  也就是竖屏
             myMediaController.title = "xiao";
             myMediaController.fullscreen = false;

@@ -30,64 +30,64 @@ import io.vov.vitamio.widget.VideoView;
 
 /**
  * 公共方法
- public void onFinishInflate()
- 从XML加载完所有子视图后调用。初始化控制视图（调用initControllerView方法，设置事件、绑定控件和设置默认值）。
-
- public void setAnchorView(View view)
- 设置MediaController绑定到一个视图上。例如可以是一个VideoView对象，或者是你的activity的主视图。
- 参数
- view	可见时绑定的视图
-
- public void setMediaPlayer(MediaPlayerControl player)
- 设置媒体播放器。并更新播放/暂停按钮状态。
-
- public void setInstantSeeking(boolean seekWhenDragging)
- 设置用户拖拽SeekBar时画面是否跟着变化。（VPlayer默认完成操作后再更新画面）
-
- public void show()
- 显示MediaController。默认显示3秒后自动隐藏。
-
- public void show(int timeout)
- 显示MediaController。在timeout毫秒后自动隐藏。
- 参数
- timeout	超时时间，单位毫秒。为0时控制条的hide()将被调用。
-
- public void setFileName(String name)
- 设置视频文件名称。
-
- public void setInfoView(OutlineTextView v)
- 设置保存MediaController的操作信息。例如进度改变时更新v。
-
- public void setAnimationStyle(int animationStyle)
- 更改MediaController的动画风格。
- 如果MediaController正在显示，调用此方法将在下一次显示时生效。
- 参数
- animationStyle	在MediaController显示或隐藏时使用的动画风格。设置-1为默认风格，0没有动画，或设置一个明确的动画资源。
-
- public boolean isShowing()
- 获取MediaController是否已经显示。
-
- public void hide()
- 隐藏MediaController。
-
- public void setOnShownListener(OnShownListener l)
- 注册一个回调函数，在MediaController显示后被调用。
-
- public void setOnHiddenListener(OnHiddenListener l)
- 注册一个回调函数，在MediaController隐藏后被调用。
-
- public boolean onTouchEvent(MotionEvent event)
- 调用show()并返回true。
-
- public boolean onTrackballEvent(MotionEvent ev)
- 调用show()并返回false。
-
- public void setEnabled(boolean enabled)
- 设置MediaController的可用状态。包括进度条和播放/暂停按钮。
-
- 受保护方法
- protected View makeControllerView()
- 创建控制播放的布局视图。子类可重写此方法创建自定义视图。
+ * public void onFinishInflate()
+ * 从XML加载完所有子视图后调用。初始化控制视图（调用initControllerView方法，设置事件、绑定控件和设置默认值）。
+ * <p>
+ * public void setAnchorView(View view)
+ * 设置MediaController绑定到一个视图上。例如可以是一个VideoView对象，或者是你的activity的主视图。
+ * 参数
+ * view	可见时绑定的视图
+ * <p>
+ * public void setMediaPlayer(MediaPlayerControl player)
+ * 设置媒体播放器。并更新播放/暂停按钮状态。
+ * <p>
+ * public void setInstantSeeking(boolean seekWhenDragging)
+ * 设置用户拖拽SeekBar时画面是否跟着变化。（VPlayer默认完成操作后再更新画面）
+ * <p>
+ * public void show()
+ * 显示MediaController。默认显示3秒后自动隐藏。
+ * <p>
+ * public void show(int timeout)
+ * 显示MediaController。在timeout毫秒后自动隐藏。
+ * 参数
+ * timeout	超时时间，单位毫秒。为0时控制条的hide()将被调用。
+ * <p>
+ * public void setFileName(String name)
+ * 设置视频文件名称。
+ * <p>
+ * public void setInfoView(OutlineTextView v)
+ * 设置保存MediaController的操作信息。例如进度改变时更新v。
+ * <p>
+ * public void setAnimationStyle(int animationStyle)
+ * 更改MediaController的动画风格。
+ * 如果MediaController正在显示，调用此方法将在下一次显示时生效。
+ * 参数
+ * animationStyle	在MediaController显示或隐藏时使用的动画风格。设置-1为默认风格，0没有动画，或设置一个明确的动画资源。
+ * <p>
+ * public boolean isShowing()
+ * 获取MediaController是否已经显示。
+ * <p>
+ * public void hide()
+ * 隐藏MediaController。
+ * <p>
+ * public void setOnShownListener(OnShownListener l)
+ * 注册一个回调函数，在MediaController显示后被调用。
+ * <p>
+ * public void setOnHiddenListener(OnHiddenListener l)
+ * 注册一个回调函数，在MediaController隐藏后被调用。
+ * <p>
+ * public boolean onTouchEvent(MotionEvent event)
+ * 调用show()并返回true。
+ * <p>
+ * public boolean onTrackballEvent(MotionEvent ev)
+ * 调用show()并返回false。
+ * <p>
+ * public void setEnabled(boolean enabled)
+ * 设置MediaController的可用状态。包括进度条和播放/暂停按钮。
+ * <p>
+ * 受保护方法
+ * protected View makeControllerView()
+ * 创建控制播放的布局视图。子类可重写此方法创建自定义视图。
  */
 public class MyMediaController extends MediaController implements View.OnClickListener {
 
@@ -98,7 +98,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     private ImageButton img_back;//返回键
     private ImageView img_Battery;//电池电量显示
     public ImageButton textViewTime;//时间提示
-    private TextView textViewBattery,mediacontroller_file_name;//文字显示电池
+    private TextView textViewBattery, mediacontroller_file_name;//文字显示电池
     private VideoView videoView;
     private Activity activity;
     private Context context;
@@ -125,7 +125,8 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     //返回监听
     private OnClickListener backListener = new OnClickListener() {
         public void onClick(View v) {
-            if(activity != null){
+            if (fullscreen) new MyClickTask().execute("");
+            else if (activity != null) {
                 activity.finish();
             }
         }
@@ -148,7 +149,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
 
     //videoview 用于对视频进行控制的等，activity为了退出
-    public MyMediaController(Context context, VideoView videoView , Activity activity) {
+    public MyMediaController(Context context, VideoView videoView, Activity activity) {
         super(context);
         this.context = context;
         this.videoView = videoView;
@@ -168,23 +169,23 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     @Override
     protected View makeControllerView() {
         View v = View.inflate(context, R.layout.mymediacontroller, this);
-       // View v = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(getResources().getIdentifier("mymediacontroller", "layout", getContext().getPackageName()), this);
+        // View v = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(getResources().getIdentifier("mymediacontroller", "layout", getContext().getPackageName()), this);
         v.setMinimumHeight(controllerWidth);
         //TOP
         img_back = (ImageButton) v.findViewById(R.id.mediacontroller_top_back);
         img_Battery = (ImageView) v.findViewById(R.id.mediacontroller_imgBattery);
         img_back.setOnClickListener(backListener);
-        textViewBattery = (TextView)v.findViewById(R.id.mediacontroller_Battery);
-        textViewTime = (ImageButton)v.findViewById(R.id.mediacontroller_time);
+        textViewBattery = (TextView) v.findViewById(R.id.mediacontroller_Battery);
+        textViewTime = (ImageButton) v.findViewById(R.id.mediacontroller_time);
         textViewTime.setOnClickListener(this);
-        mediacontroller_file_name = (TextView)v.findViewById(R.id.mediacontroller_file_name);
+        mediacontroller_file_name = (TextView) v.findViewById(R.id.mediacontroller_file_name);
         mediacontroller_file_name.setOnClickListener(this);
 
-        seekBarProgress = (SeekBar)v.findViewById(R.id.mediacontroller_seekbar);
+        seekBarProgress = (SeekBar) v.findViewById(R.id.mediacontroller_seekbar);
 
         //mid
-        mVolumeBrightnessLayout = (RelativeLayout)v.findViewById(R.id.operation_volume_brightness);
-        mOperationBg = (ImageView)v.findViewById(R.id.operation_bg);
+        mVolumeBrightnessLayout = (RelativeLayout) v.findViewById(R.id.operation_volume_brightness);
+        mOperationBg = (ImageView) v.findViewById(R.id.operation_bg);
         mOperationTv = (TextView) v.findViewById(R.id.operation_tv);
         mOperationTv.setVisibility(View.GONE);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
@@ -207,7 +208,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         // 处理手势结束
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
-                type=0;
+                type = 0;
                 endGesture();
                 if (progress_turn) {
                     onFinishSeekBar();
@@ -231,16 +232,18 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(v==textViewTime){
+        if (v == textViewTime) {
             String path = "";
             new MyClickTask().execute(path);
         }
 
     }
+
     public String title;
     //关于横竖吧切换
     public boolean fullscreen = false;
-    public class MyClickTask extends AsyncTask<String,Integer,String> {
+
+    public class MyClickTask extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -283,8 +286,8 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (videoView != null){
-                videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);//工具自己测量横竖屏  成功
+            if (videoView != null) {
+                videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);//工具自己测量横竖屏  成功  VIDEO_LAYOUT_SCALE全屏
             }
 //            View decorView = activity.getWindow().getDecorView();
 //            decorView.setSystemUiVisibility(View.INVISIBLE);//消除状态栏
@@ -305,7 +308,8 @@ public class MyMediaController extends MediaController implements View.OnClickLi
         }
     }
 
-    private int type= 0;//优化滑动改变进度 改变亮度的问题
+    private int type = 0;//优化滑动改变进度 改变亮度的问题
+
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
@@ -324,6 +328,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             progress = getProgress();
             return true;
         }
+
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             float beginX = e1.getX();
@@ -336,8 +341,8 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             disp.getSize(size);
             int windowWidth = size.x;
             int windowHeight = size.y;
-            if (type==1||(Math.abs(endX - beginX) < Math.abs(beginY - endY))) {//上下滑动
-                if (type==2){
+            if (type == 1 || (Math.abs(endX - beginX) < Math.abs(beginY - endY))) {//上下滑动
+                if (type == 2) {
                     onSeekTo((endX - beginX) / 20);
                     return super.onScroll(e1, e2, distanceX, distanceY);
                 }
@@ -346,13 +351,14 @@ public class MyMediaController extends MediaController implements View.OnClickLi
                 } else if (beginX < windowWidth * 1.0 / 4.0) {// 左边滑动 屏幕2/5
                     onBrightnessSlide((beginY - endY) / windowHeight);
                 }
-                type=1;
-            }else {
-                type=2;
+                type = 1;
+            } else {
+                type = 2;
                 onSeekTo((endX - beginX) / 20);
             }
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
+
         //双击暂停或开始
         @Override
         public boolean onDoubleTap(MotionEvent e) {
@@ -375,7 +381,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     private void onSeekTo(float percent) {
         //计算并显示 前进后退
         if (!progress_turn) {
-           // onStartSeekBar();
+            // onStartSeekBar();
             progress_turn = true;
         }
         int change = (int) (percent);
@@ -430,7 +436,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             mOperationBg.setImageResource(R.drawable.volmn_no);
         }
         //DecimalFormat    df   = new DecimalFormat("######0.00");
-        mOperationTv.setText((int) (((double) index / mMaxVolume)*100)+"%");
+        mOperationTv.setText((int) (((double) index / mMaxVolume) * 100) + "%");
         // 变更声音
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
 
@@ -455,7 +461,6 @@ public class MyMediaController extends MediaController implements View.OnClickLi
             mOperationTv.setVisibility(VISIBLE);
 
         }
-
 
 
         WindowManager.LayoutParams lpa = activity.getWindow().getAttributes();
@@ -491,34 +496,44 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     }
 
 
-    public void setTime(String time){
+    public void setTime(String time) {
 //        if (textViewTime != null)
 //            textViewTime.setText(time);
     }
+
     //显示电量，
-    public void setBattery(String stringBattery){
-        if(textViewTime != null && img_Battery != null){
+    public void setBattery(String stringBattery) {
+        if (textViewTime != null && img_Battery != null) {
             textViewBattery.setText(stringBattery + "%");
             int battery = Integer.valueOf(stringBattery);
-            if(battery < 15)img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_15));
-            if(battery < 30 && battery >= 15)img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_15));
-            if(battery < 45 && battery >= 30)img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_30));
-            if(battery < 60 && battery >= 45)img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_45));
-            if(battery < 75 && battery >= 60)img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_60));
-            if(battery < 90 && battery >= 75)img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_75));
-            if(battery > 90 )img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_90));
+            if (battery < 15)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_15));
+            if (battery < 30 && battery >= 15)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_15));
+            if (battery < 45 && battery >= 30)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_30));
+            if (battery < 60 && battery >= 45)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_45));
+            if (battery < 75 && battery >= 60)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_60));
+            if (battery < 90 && battery >= 75)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_75));
+            if (battery > 90)
+                img_Battery.setImageDrawable(getResources().getDrawable(R.drawable.battery_90));
         }
     }
+
     //隐藏/显示
-    private void toggleMediaControlsVisiblity(){
+    private void toggleMediaControlsVisiblity() {
         if (isShowing()) {
             hide();
         } else {
             show();
         }
     }
+
     //播放与暂停
-    private void playOrPause(){
+    private void playOrPause() {
         if (videoView != null)
             if (videoView.isPlaying()) {
                 videoView.pause();

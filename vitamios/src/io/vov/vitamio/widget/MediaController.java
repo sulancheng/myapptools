@@ -405,7 +405,10 @@ public class MediaController extends FrameLayout {
 
         mWindow.setAnimationStyle(mAnimStyle);
         setWindowLayoutType();
-        mWindow.showAtLocation(mAnchor, Gravity.NO_GRAVITY, anchorRect.left, anchorRect.bottom);
+//        mWindow.showAtLocation(mAnchor, Gravity.NO_GRAVITY, anchorRect.left, anchorRect.bottom);
+            //20180807修改  是的控制界面能够随着播放video界面而变化大小。
+          mWindow.setHeight(anchorRect.height());
+          mWindow.showAtLocation(mAnchor, Gravity.NO_GRAVITY, anchorRect.left, anchorRect.top);
       }
       mShowing = true;
       if (mShownListener != null)
