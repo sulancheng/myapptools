@@ -114,6 +114,8 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
                 case 0:
                     Intent intent = new Intent(mContext, SettingActivity.class);
                     startActivity(intent);
+                    //api<=15 不能使用 ，悲剧
+//                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mActivity).toBundle());
                     break;
                 case 1:
                     Intent intent1 = new Intent(mContext, WebActivity.class);

@@ -16,12 +16,14 @@ import com.susu.hh.myapptools.R;
  */
 public abstract class BaseFragment extends Fragment {
     protected Context mContext;
+    protected Activity mActivity;
     private View view;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mContext = activity;
+        mActivity = activity;
     }
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {

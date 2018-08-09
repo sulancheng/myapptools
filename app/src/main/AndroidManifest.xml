@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SplashActivity"></activity>
+        <activity android:name=".activity.SplashActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -275,7 +275,7 @@
             android:name=".activity.player.MyVitamioPlayerTest"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity android:name=".activity.GoBackMia" />
         <activity
             android:name=".activity.Sliderlayout"
@@ -297,7 +297,8 @@
         <activity android:name=".activity.HelloViewpagerActivity" />
         <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.PopuwinActivity" />
-        <activity android:name=".utils.ObserverDemo.ObserTestActivity"></activity>
+        <activity android:name=".utils.ObserverDemo.ObserTestActivity" />
+        <activity android:name=".activity.ClipchildActivity"></activity>
     </application>
 
 </manifest>

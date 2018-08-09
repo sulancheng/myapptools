@@ -4,60 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:clipChildren="false"
     tools:context=".activity.MainActivity">
+
     <RelativeLayout
         android:id="@+id/head_main"
         android:layout_width="match_parent"
-        android:background="@drawable/guide_bcbc"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@drawable/guide_bcbc">
+
         <ImageView
             android:id="@+id/left_click"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:layout_width="18dp"
-            android:src="@drawable/home_title_tight"
-            android:layout_height="18dp" />
+            android:src="@drawable/home_title_tight" />
+
         <com.susu.hh.myapptools.ui.baseview.BaseTextView
-            android:layout_centerInParent="true"
-            android:textSize="20sp"
             android:id="@+id/textTit"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="xxx"
-            android:layout_height="wrap_content" />
+            android:textSize="20sp" />
+
         <ImageView
             android:id="@+id/right_click"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:layout_width="18dp"
-            android:src="@drawable/home_more2"
-            android:layout_height="18dp" />
+            android:src="@drawable/home_more2" />
     </RelativeLayout>
-   <FrameLayout
-       android:id="@+id/vp_main"
-       android:layout_width="match_parent"
-       android:layout_weight="1"
-       android:layout_height="0dp">
-   </FrameLayout>
-    <LinearLayout
+
+    <FrameLayout
+        android:id="@+id/vp_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <View
-            android:id="@+id/v"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_centerVertical="true"
-            android:background="@android:color/darker_gray" />
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+    <View
+        android:id="@+id/v"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:background="@android:color/darker_gray" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:clipChildren="false"
+      >
+
+
         <RadioGroup
             android:id="@+id/main_radio"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="match_parent"
             android:layout_marginTop="2dp"
-            android:padding="3dp"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal"
+            android:padding="3dp">
+
             <RadioButton
                 android:id="@+id/home"
                 style="@style/button_style"
@@ -66,29 +74,30 @@
 
             <RadioButton
                 android:id="@+id/sort"
-                android:drawableTop="@drawable/home_selector_bc"
                 style="@style/button_style"
+                android:drawableTop="@drawable/home_selector_bc"
                 android:text="分类" />
-           <LinearLayout
+
+            <LinearLayout
                 android:id="@+id/ll_center_more"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_marginBottom="2dp"
-                >
-               <RelativeLayout
-                   android:layout_width="50dp"
-                   android:layout_height="50dp"
-                   android:background="@drawable/center_selecter">
-                   <ImageView
-                       android:layout_centerInParent="true"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:src="@drawable/search1"
-                       />
-               </RelativeLayout>
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/center_selecter">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/search1" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -109,6 +118,27 @@
                 android:drawableTop="@drawable/home_selector_bc"
                 android:text="更多" />
         </RadioGroup>
-    </LinearLayout>
+        <!--要放大的父亲是linner 如果是rela就没有效果layout_gravity自己在父类的位置
+        gravity设置儿子的位置-->
+        <LinearLayout
+            android:layout_width="76dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="-40dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/ic_launcher" />
+            <TextView
+                android:text="替换"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
