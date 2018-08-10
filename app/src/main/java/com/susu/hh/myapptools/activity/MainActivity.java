@@ -49,6 +49,8 @@ import com.susu.hh.myapptools.fragment.FragmentD;
 import com.susu.hh.myapptools.ui.AddressDialog;
 import com.susu.hh.myapptools.ui.CircleImageView;
 import com.susu.hh.myapptools.ui.RoundProgressBar;
+import com.susu.hh.myapptools.ui.xuanfochung.FloatWindowManager;
+import com.susu.hh.myapptools.ui.xuanfochung.FloatWindowService;
 import com.susu.hh.myapptools.utils.BitmapUtil;
 import com.susu.hh.myapptools.utils.CommenUtils;
 
@@ -235,6 +237,28 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
             public void onClosed() {
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (FloatWindowManager.getInstance(this).flagone){
+            Intent intentser = new Intent(this, FloatWindowService.class);
+            intentser.putExtra(FloatWindowService.LAYOUT_RES_ID, R.layout.float_window_small);
+            intentser.putExtra(FloatWindowService.ROOT_LAYOUT_ID, R.id.ll_gen);
+            startService(intentser);
+        }
+    }
+
+    //不可见时隐藏悬浮窗
+    @Override
+    protected void onPause() {
+        super.onPause();
+        boolean flag = FloatWindowManager.getInstance(this).isWindowShowing()||FloatWindowManager.getInstance(this).flagone;
+        if (flag){
+            FloatWindowManager.getInstance(this).removeAll();
+            FloatWindowManager.getInstance(this).flagone = true;
+        }
     }
 
     private void tiaozhuan(int o) {

@@ -60,13 +60,11 @@ public class MyJGGridAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return img_text[position];
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 

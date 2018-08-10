@@ -25,7 +25,10 @@ import com.susu.hh.myapptools.activity.WebActivity;
 import com.susu.hh.myapptools.activity.gridviewtuoz.GridviewTuoz;
 import com.susu.hh.myapptools.adapter.FcfViewGroupAdapter;
 import com.susu.hh.myapptools.adapter.MyJGGridAdapter;
+import com.susu.hh.myapptools.ui.FloatView;
 import com.susu.hh.myapptools.ui.MyJGGridView;
+import com.susu.hh.myapptools.ui.xuanfochung.FloatWindowManager;
+import com.susu.hh.myapptools.ui.xuanfochung.FloatWindowService;
 import com.susu.hh.myapptools.utils.CommenUtils;
 import com.susu.hh.myapptools.utils.MyLog;
 
@@ -43,18 +46,19 @@ import news.heima.itcast.autoroll.RollItem;
 public class FragmentA extends BaseFragment implements AdapterView.OnItemClickListener {
     private MyJGGridAdapter myGridAdapter;
     public String[] img_text = {"转账", "余额宝", "手机充值", "信用卡还款", "淘宝电影", "彩票",
-            "当面付", "亲密付"};
+            "当面付", "亲密付","悬浮窗"};
     String[] titledatas = {"朝辞白帝彩云间", "千里江陵一日还", "两岸猿声啼不住", "轻舟已过万重山"};
     public int[] imgs = {R.drawable.app_transfer, R.drawable.app_fund,
             R.drawable.app_phonecharge, R.drawable.app_creditcard,
             R.drawable.app_movie, R.drawable.app_lottery,
             R.drawable.app_facepay, R.drawable.app_close,
-            R.drawable.app_plane};
+            R.drawable.app_plane,R.drawable.app_movie};
     private AutoRollLayout mAutoRollLayout;
     private MyJGGridView myJGGridView;
     private FancyCoverFlow fcf;
     private FcfViewGroupAdapter fcfad;
     private ScrollView scroll;
+    private FloatView floatView;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
     }
 
     private void initDatas() {
+        floatView = new FloatView(mContext);
         int[] images = {R.drawable.aa, R.drawable.bb, R.drawable.cc, R.drawable.dd, R.drawable.ff};
         if (null == fcfad) {
             fcfad = new FcfViewGroupAdapter(images);
@@ -107,9 +112,9 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
             view.getLocationOnScreen(locate);
             int[] locate2 = new int[2];
             view.getLocationInWindow(locate2);
-            MyLog.i("viewweizhiFRAGa","location1 = "+locate[0]+"   ------"+ locate[1]);
-            MyLog.i("viewweizhiFRAGa","location2 = "+locate2[0]+"   ------"+ locate2[1]);
-            MyLog.i("viewweizhiFRAGa","view ---"+view.getLeft()+"----top = "+view.getTop()+"  with="+view.getWidth());
+            MyLog.i("viewweizhiFRAGa", "location1 = " + locate[0] + "   ------" + locate[1]);
+            MyLog.i("viewweizhiFRAGa", "location2 = " + locate2[0] + "   ------" + locate2[1]);
+            MyLog.i("viewweizhiFRAGa", "view ---" + view.getLeft() + "----top = " + view.getTop() + "  with=" + view.getWidth());
             switch (position) {
                 case 0:
                     Intent intent = new Intent(mContext, SettingActivity.class);
@@ -152,6 +157,21 @@ public class FragmentA extends BaseFragment implements AdapterView.OnItemClickLi
                     intent7.putExtra("view1", location[0]);
                     intent7.putExtra("view2", location[1]);
                     startActivity(intent7);
+                    break;
+                case 8:
+                    boolean windowShowing = FloatWindowManager.getInstance(mContext).isWindowShowing();
+                    if (windowShowing){
+                        FloatWindowManager.getInstance(mContext).removeAll();
+                    }else {
+                        Intent intentser = new Intent(mContext, FloatWindowService.class);
+                        intentser.putExtra(FloatWindowService.LAYOUT_RES_ID, R.layout.float_window_small);
+                        intentser.putExtra(FloatWindowService.ROOT_LAYOUT_ID, R.id.ll_gen);
+                        mContext.startService(intentser);
+                    }
+//                    if (floatView.isShow)
+//                        floatView.hide();
+//                    else
+//                        floatView.show();
                     break;
             }
         }

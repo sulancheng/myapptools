@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import com.susu.hh.myapptools.R;
 import com.susu.hh.myapptools.utils.BitmapUtil;
-import com.susu.hh.myapptools.utils.LogcatFileManager;
 
 import java.io.File;
 
@@ -51,12 +50,12 @@ public class StartActivity extends Activity {
             } else {
                 starttoactovoty();
                 initfile();
-                LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
+//                LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
             }
         } else {
             starttoactovoty();
             initfile();
-            LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
+//            LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
         }
     }
     @Override
@@ -77,7 +76,7 @@ public class StartActivity extends Activity {
             }
             starttoactovoty();
             initfile();
-            LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
+//            LogcatFileManager.getInstance().start(BitmapUtil.getDpath("mylog"));
         }
     }
     void starttoactovoty(){

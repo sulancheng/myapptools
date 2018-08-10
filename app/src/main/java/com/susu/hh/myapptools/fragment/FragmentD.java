@@ -126,9 +126,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
         listview = (ListView) view.findViewById(R.id.listview);
         tv_nomedia = (TextView) view.findViewById(R.id.tv_nomedia);
         pb_loading = (ProgressBar) view.findViewById(R.id.pb_loading);
-        search.enableVoiceRecognition(this);
-        search.setEnabled(false);
-        search.toggleSearchclose();
+
         if (items != null && items.size() > 0) {
             showData();
         } else {
@@ -138,6 +136,7 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
             SearchResult option = new SearchResult("本人好帅 " + Integer.toString(x), getResources().getDrawable(R.drawable.ic_history));
             search.addSearchable(option);
         }
+
         search.setMenuListener(new SearchBox.MenuListener() {
 
             @Override
@@ -183,6 +182,9 @@ public class FragmentD extends BaseFragment implements AdapterView.OnItemClickLi
             }
 
         });
+        search.enableVoiceRecognition(this);
+        search.setEnabled(false);
+        search.toggleSearchclose();
         search.setOverflowMenu(R.menu.overflow_menu);
         search.setOverflowMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
