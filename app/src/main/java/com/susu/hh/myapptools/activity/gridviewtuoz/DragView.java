@@ -24,4 +24,12 @@ public class DragView {
 		this.resid = resid;
 	}
 
+	@Override
+	public String toString() {
+		return "DragView{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", resid=" + resid +
+				'}';
+	}
 }

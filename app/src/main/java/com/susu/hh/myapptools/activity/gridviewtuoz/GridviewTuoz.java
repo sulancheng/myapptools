@@ -12,12 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.susu.hh.myapptools.R;
-import com.susu.hh.myapptools.activity.SweipeBackActivity;
+import com.susu.hh.myapptools.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridviewTuoz extends SweipeBackActivity {
+public class GridviewTuoz extends BaseActivity {
 
     RelativeLayout rl_strues;
     /**
@@ -117,7 +117,6 @@ public class GridviewTuoz extends SweipeBackActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // TODO Auto-generated method stub
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 int DownY = (int)event.getY();
