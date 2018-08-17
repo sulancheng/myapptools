@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".utils.volleyutils.AppController"
@@ -299,8 +299,11 @@
         <activity android:name=".activity.DrawerActivity" />
         <activity android:name=".activity.PopuwinActivity" />
         <activity android:name=".utils.ObserverDemo.ObserTestActivity" />
-        <activity android:name=".activity.ClipchildActivity"></activity>
-        <service android:name=".ui.xuanfochung.FloatWindowService"></service>
+        <activity android:name=".activity.ClipchildActivity" />
+
+        <service android:name=".ui.xuanfochung.FloatWindowService" />
+
+        <activity android:name=".mvp.view.ILoginActivity"></activity>
     </application>
 
 </manifest>

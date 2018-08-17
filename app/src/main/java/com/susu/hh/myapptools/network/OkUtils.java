@@ -9,6 +9,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+import com.susu.hh.myapptools.utils.Base64Utils;
 import com.susu.hh.myapptools.utils.MyLog;
 import com.susu.hh.myapptools.utils.MyToast;
 
@@ -56,6 +57,10 @@ public class OkUtils {
 
     public static void upDataStudy(Context context, List<File> files, HashMap<String, String> params, MyResponse myresponse) {
         requsetWenjian(getServerChannel() + "/update", context, files, params, myresponse, 1);
+    }
+    //厨师列表
+    public static void getCookerList(Context context, Object reparam, MyResponse myresponse) {
+        requsetJsonparm(getServerChannel() + "/getCookerList", context, reparam, myresponse);
     }
 
 
@@ -137,12 +142,13 @@ public class OkUtils {
     public static void requsetJsonparm(final String url, final Context mContext, Object obj, final MyResponse myresponse) {
 
         String json = gson.toJson(obj);
+        String encodejson = Base64Utils.encodeBase64(json);
         MyLog.i("post_json数据请求", " url=" + url + " json = " + json );
         OkGo.<String>post(url)
                 .tag(mContext)
                 //.cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 // .params(params)//  这里不要使用params，upJson 与 params 是互斥的，只有 upJson 的数据会被上传
-                .upJson(json)//setCertificates
+                .upJson(encodejson)//setCertificates
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -172,12 +178,12 @@ public class OkUtils {
     private static void checkresponse(int type, String responseBody, MyResponse myresponse) {
         if (type == 1) {//成功
             if (myresponse != null) {
-                myresponse.expResponse(responseBody);
+                myresponse.expResponse(Base64Utils.decodeBase64(responseBody));
             }
 
         } else {
             if (myresponse != null) {
-                myresponse.error(responseBody);
+                myresponse.error(Base64Utils.decodeBase64(responseBody));
             }
         }
 

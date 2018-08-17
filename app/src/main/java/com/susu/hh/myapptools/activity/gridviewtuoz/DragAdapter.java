@@ -107,7 +107,6 @@ public class DragAdapter extends BaseAdapter {
 
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						if (!Common.isAnimaEnd) {
 							return;
 						}

@@ -46,6 +46,7 @@ import com.susu.hh.myapptools.fragment.FragmentA;
 import com.susu.hh.myapptools.fragment.FragmentB;
 import com.susu.hh.myapptools.fragment.FragmentC;
 import com.susu.hh.myapptools.fragment.FragmentD;
+import com.susu.hh.myapptools.mvp.view.ILoginActivity;
 import com.susu.hh.myapptools.ui.AddressDialog;
 import com.susu.hh.myapptools.ui.CircleImageView;
 import com.susu.hh.myapptools.ui.RoundProgressBar;
@@ -163,7 +164,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         }
     };*/
     private void initRightAndLeftMenu() {
-        String[] arr = {"聊天", "发现", "通讯录", "朋友圈", "订阅号"};
+        String[] arr = {"聊天", "发现", "通讯录", "朋友圈", "mvp 模式"};
         setBehindContentView(R.layout.left_menu_frame);
         ListView mLeftList = (ListView) findViewById(R.id.iv_left_menu);
         LinearLayout ll_setting = (LinearLayout) findViewById(R.id.ll_setting);
@@ -203,6 +204,11 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("onItemClick", "点了");
+                if (position==4){
+                    menu.showContent();//关闭
+                    startActivity(new Intent(MainActivity.this, ILoginActivity.class));
+                    return;
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 //参数2设置style,第二个构造函数。
                 /*AlertDialog dialog = builder.create();
