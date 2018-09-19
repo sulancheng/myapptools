@@ -20,11 +20,7 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
         <activity android:name=".activity.StartActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.SplashActivity" />
         <activity
@@ -303,7 +299,15 @@
 
         <service android:name=".ui.xuanfochung.FloatWindowService" />
 
-        <activity android:name=".mvp.view.ILoginActivity"></activity>
+        <activity android:name=".mvp.view.ILoginActivity" />
+        <activity android:name=".testbaseact.BaseTestActivity" />
+        <activity android:name=".testbaseact.OneBaseActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

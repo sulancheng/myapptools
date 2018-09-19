@@ -22,7 +22,7 @@ public class ILoginActivity extends Activity implements ILoginView {
 
     @Override
     public void findbyid() {
-        tv_res = findViewById(R.id.tv_res);
+        tv_res = (TextView) findViewById(R.id.tv_res);
     }
 
     @Override
