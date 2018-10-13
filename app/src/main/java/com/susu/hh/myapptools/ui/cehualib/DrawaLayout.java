@@ -188,7 +188,8 @@ public class DrawaLayout extends FrameLayout {
         //mViewDragHelper.shouldInterceptTouchEvent(ev);
        /* 需要注意的地方：如果ViewGroup的子控件会消耗点击事件，例如按钮，
         在触摸屏幕的时候就会先走onInterceptTouchEvent方法，判断是否可以捕获，
-        而在判断的过程中会去判断另外两个回调的方法：getViewHorizontalDragRange和getViewVerticalDragRange，只有这两个方法返回大于0的值才能正常的捕获。*/
+        而在判断的过程中会去判断另外两个回调的方法：getViewHorizontalDragRange和getViewVerticalDragRange，
+        只有这两个方法返回大于0的值才能正常的捕获。*/
 
         @Override
         public int getViewHorizontalDragRange(View child) {

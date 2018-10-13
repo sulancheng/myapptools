@@ -25,7 +25,7 @@ dependencies {
     compile project(':lib_zxing')
     compile project(':lib_autoroll')
     compile project(':lib-fcf')
-    compile project(':vitamios')
+    compile project(':vitamio1013')
     compile project(':seach_library')
     //个性化进度条
     //各种输入法

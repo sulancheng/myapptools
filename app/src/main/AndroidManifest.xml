@@ -20,7 +20,11 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar">
         <activity android:name=".activity.StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.SplashActivity" />
         <activity
@@ -272,7 +276,7 @@
             android:name=".activity.player.MyVitamioPlayerTest"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name=".activity.GoBackMia" />
         <activity
             android:name=".activity.Sliderlayout"
@@ -302,11 +306,7 @@
         <activity android:name=".mvp.view.ILoginActivity" />
         <activity android:name=".testbaseact.BaseTestActivity" />
         <activity android:name=".testbaseact.OneBaseActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
