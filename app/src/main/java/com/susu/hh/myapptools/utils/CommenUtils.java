@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.net.TrafficStats;
 import android.os.Handler;
 import android.os.Looper;
@@ -176,11 +175,15 @@ public class CommenUtils {
         view.setLayoutParams(params);//将设置好的布局参数应用到控件中
     }
     //屏幕的宽高
-    public void getwithandheight(Context mcontext){
+    public static int getwithandheight(Context mcontext){
         //WindowManager manager = mcontext.getWindowManager();
-        Resources resources = mcontext.getResources();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        int width = outMetrics.widthPixels;
-        int height = outMetrics.heightPixels;
+//        Resources resources = mcontext.getResources();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        int width = outMetrics.widthPixels;
+//        int height = outMetrics.heightPixels;
+        DisplayMetrics dm = mcontext.getResources().getDisplayMetrics();
+        int height = dm.heightPixels;
+        int width  = dm.widthPixels;
+        return height;
     }
 }

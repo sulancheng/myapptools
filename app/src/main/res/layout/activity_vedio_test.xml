@@ -5,53 +5,73 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.player.MyVitamioPlayerTest">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-                <io.vov.vitamio.widget.VideoView
-                    android:id="@+id/surface_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-                <master.flame.danmaku.ui.widget.DanmakuView
-                    android:id="@+id/danmaku_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-        </FrameLayout>
-        <LinearLayout
-            android:id="@+id/ll_list"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:background="#fff"
-            android:layout_height="match_parent">
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:text="我是列表"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
 
-        </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_par"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <io.vov.vitamio.widget.CenterLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <io.vov.vitamio.widget.VideoView
+                android:id="@+id/surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+        </io.vov.vitamio.widget.CenterLayout>
+
+        <master.flame.danmaku.ui.widget.DanmakuView
+            android:id="@+id/danmaku_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我是列表" />
+
+    </LinearLayout>
 
 </LinearLayout>

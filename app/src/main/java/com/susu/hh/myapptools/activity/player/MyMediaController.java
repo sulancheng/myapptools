@@ -149,7 +149,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
 
     //videoview 用于对视频进行控制的等，activity为了退出
-    public MyMediaController(Context context, VideoView videoView, Activity activity) {
+    public MyMediaController(Context context, VideoView videoView, MyVitamioPlayerTest activity) {
         super(context);
         this.context = context;
         this.videoView = videoView;
@@ -286,9 +286,12 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (videoView != null) {
-                videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);//工具自己测量横竖屏  成功  VIDEO_LAYOUT_SCALE全屏
+            if (result.equals("quan")){
+                if (videoView != null) {
+                    videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);//工具自己测量横竖屏  成功  VIDEO_LAYOUT_SCALE全屏
+                }
             }
+
 //            View decorView = activity.getWindow().getDecorView();
 //            decorView.setSystemUiVisibility(View.INVISIBLE);//消除状态栏
 //            ViewGroup.LayoutParams lp = videoView.getLayoutParams();

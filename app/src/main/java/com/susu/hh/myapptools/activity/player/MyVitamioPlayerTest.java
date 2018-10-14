@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,8 +13,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.susu.hh.myapptools.R;
 import com.susu.hh.myapptools.bean.MediaItem;
 import com.susu.hh.myapptools.utils.MyLog;
 import com.susu.hh.myapptools.utils.MyToast;
+import com.susu.hh.myapptools.utils.SreenUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,7 +55,7 @@ import master.flame.danmaku.ui.widget.DanmakuView;
 
 public class MyVitamioPlayerTest extends Activity {
 
-    public static final String TAG = "PlayActivity";
+    public static final String TAG = "MyVitamioPlayerTest";
     private static final int STARTNOF = 1001;
     private static final int SETPROGRESS = 1002;
 
@@ -94,6 +97,7 @@ public class MyVitamioPlayerTest extends Activity {
     private DanmakuView danmakuView;
     private DanmakuContext danmakuContext;
     private LinearLayout ll_list;
+    private FrameLayout fl_par;
 
     @Override
     protected void onResume() {
@@ -122,7 +126,7 @@ public class MyVitamioPlayerTest extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Vitamio.isInitialized(this);//qianwanbiewangjile
+        Vitamio.isInitialized(getApplicationContext());//qianwanbiewangjile
 //        //定义全屏参数
 //        int flag = WindowManager.LayoutParams.FLAG_FULLSCREEN;
 //        //获得当前窗体对象
@@ -132,22 +136,39 @@ public class MyVitamioPlayerTest extends Activity {
 
         //toggleHideyBar();
         setContentView(R.layout.activity_vedio_test);
+
         mVideoView = (VideoView) findViewById(R.id.surface_view);
+        fl_par = (FrameLayout) findViewById(R.id.fl_par);
+        //-------------------------------------------------------------
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width, SreenUtil.dip2px(this, 240));;
+//      params2.height =  (int) (ScreenUtils.getScreenWidth(this) * 9.0f / 16);
+        fl_par.setLayoutParams(params2);
+        //---------------------------------------------------------------
+        ll_list = (LinearLayout) findViewById(R.id.ll_list);
         initData();
         initdanmu();
 //        mMediaController = new MediaController(this);
         myMediaController = new MyMediaController(this, mVideoView, this);
-        ll_list = (LinearLayout) findViewById(R.id.ll_list);
 
         myMediaController.show(5000);
 //        mMediaController.show(5000);
         mVideoView.setMediaController(myMediaController);
         mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//高画质
         mVideoView.requestFocus();
+
+
+
+
+
         //画面是否拉伸
 //       mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 16/9 );
         registerBoradcastReceiver();
-        MyLog.i("myMediaController", myMediaController.getProgress() + "jja");
+        MyLog.i("myMediaController", myMediaController.getProgress() + "zgssdadjja");
         mHandler.sendEmptyMessageDelayed(TIME, 0);
         setlistener();
         //开始播放
@@ -265,6 +286,10 @@ public class MyVitamioPlayerTest extends Activity {
         //当底层解码准备好的时候
         @Override
         public void onPrepared(MediaPlayer mp) {
+//            if (mVideoView != null) {
+//                mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
+////                mVideoView.invalidate();
+//            }
             mVideoView.start();//开始播放
             myMediaController.hide();//默认是隐藏控制面板
 
@@ -399,36 +424,70 @@ public class MyVitamioPlayerTest extends Activity {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (mVideoView != null) {
-            mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
-        }
-
+//        super.onConfigurationChanged(newConfig);
         super.onConfigurationChanged(newConfig);
         int layoutDirection = newConfig.orientation;
         Log.i("onConfigurationChanged", layoutDirection + "   getRequestedOrientation=" + getRequestedOrientation());
         if (layoutDirection == Configuration.ORIENTATION_LANDSCAPE) {//横着是2
             //横屏
+
             ll_list.setVisibility(View.GONE);
             myMediaController.title = "quan";
             myMediaController.fullscreen = true;
             myMediaController.textViewTime.setBackgroundResource(R.drawable.xiaopin);
-//            setRequestedOrientation
-//                    (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        } else {
+            //隐藏状态栏
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);//消除状态栏
+
+            DisplayMetrics dm = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+            int width = dm.widthPixels;
+            int height = dm.heightPixels;
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width,height);;
+//      params2.height =  (int) (ScreenUtils.getScreenWidth(this) * 9.0f / 16);
+//            params2.height =height;
+//            params2.width = width;
+//            params2.height = FrameLayout.LayoutParams.MATCH_PARENT;
+//            params2.width = FrameLayout.LayoutParams.MATCH_PARENT;
+//            params2.height = SreenUtil.getScreenHeight(this);
+//            params2.width = SreenUtil.getScreenWidth(this);
+            fl_par.setLayoutParams(params2);
+            if (mVideoView != null) {
+                mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
+            }
+
+        } else if (layoutDirection == Configuration.ORIENTATION_PORTRAIT){
             ll_list.setVisibility(View.VISIBLE);
             //否则就是1  也就是竖屏
             myMediaController.title = "xiao";
             myMediaController.fullscreen = false;
             myMediaController.textViewTime.setBackgroundResource(R.drawable.quanpin);
+
+            DisplayMetrics dm = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+            int width = dm.widthPixels;
+            int height = dm.heightPixels;
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width,SreenUtil.dip2px(this, 240));
+//            params2.height =  (int) (ScreenUtils.getScreenWidth(this) * 9.0f / 16);
+//            params2.height = SreenUtil.dip2px(this, 240);
+            fl_par.setLayoutParams(params2);
+            //显示状态栏
+            this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().getDecorView().setSystemUiVisibility(View.VISIBLE);//显示状态栏
+            if (mVideoView != null) {
+                mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
+            }
         }
-        if (layoutDirection != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-                }
-            }, 6000);
-        }
+
+//        if (layoutDirection != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
+//            mHandler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+//                }
+//            }, 6000);
+//        }
         //Configuration.ORIENTATION_LANDSCAPE;
 //        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 //            //当前为横屏， 在此处添加额外的处理代码
