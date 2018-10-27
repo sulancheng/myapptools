@@ -387,7 +387,10 @@ public class MediaController extends FrameLayout {
 
         mWindow.setAnimationStyle(mAnimStyle);
         setWindowLayoutType();
-        mWindow.showAtLocation(mAnchor, Gravity.NO_GRAVITY, anchorRect.left, anchorRect.bottom);
+//        mWindow.showAtLocation(mAnchor, Gravity.NO_GRAVITY, anchorRect.left, anchorRect.bottom);
+        android.util.Log.i("video的高度",anchorRect.height()+"  "+mAnchor.getHeight());
+        mWindow.setHeight(mAnchor.getHeight());
+        mWindow.showAtLocation(mAnchor, Gravity.NO_GRAVITY, anchorRect.left, 0);//修改控制器的高度高度
       }
       mShowing = true;
       if (mShownListener != null)

@@ -234,7 +234,10 @@ public class MyMediaController extends MediaController implements View.OnClickLi
     public void onClick(View v) {
         if (v == textViewTime) {
             String path = "";
+            //切换一下显示控制栏
+            hide();
             new MyClickTask().execute(path);
+
         }
 
     }
@@ -286,6 +289,7 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            show();
             if (result.equals("quan")){
                 if (videoView != null) {
                     videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);//工具自己测量横竖屏  成功  VIDEO_LAYOUT_SCALE全屏

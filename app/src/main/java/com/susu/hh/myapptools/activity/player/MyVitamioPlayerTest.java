@@ -35,6 +35,7 @@ import java.util.Random;
 
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
+import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
@@ -152,7 +153,7 @@ public class MyVitamioPlayerTest extends Activity {
         ll_list = (LinearLayout) findViewById(R.id.ll_list);
         initData();
         initdanmu();
-//        mMediaController = new MediaController(this);
+        MediaController  mMediaController = new MediaController(this);
         myMediaController = new MyMediaController(this, mVideoView, this);
 
         myMediaController.show(5000);
