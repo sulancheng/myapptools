@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
+import com.susu.hh.myapptools.utils.LogcatFileManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +32,7 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        LogcatFileManager.getInstance().init(getApplicationContext());
         initokgo();
     }
     private void initokgo() {
