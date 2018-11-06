@@ -15,8 +15,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationManagerCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
@@ -133,7 +135,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
                 }
                 if (i <= 3) {
                     title.setText(tit[i]);
-                }else {
+                } else {
                     headMain(View.GONE);
                 }
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -149,6 +151,15 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         ll_center_more.setOnClickListener(this);
         left_img.setOnClickListener(this);
         reght_img.setOnClickListener(this);
+
+        //通知栏是否打开
+        NotificationManagerCompat notification = NotificationManagerCompat.from(this);
+        boolean isEnabled = notification.areNotificationsEnabled();
+        //查看通知栏有没有打开权限
+        Log.i("kaiguan"," "+isEnabled);
+        if (!isEnabled) {
+            goToSet();
+        }
     }
 
     //主页面不用vierpager
@@ -204,7 +215,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("onItemClick", "点了");
-                if (position==4){
+                if (position == 4) {
                     menu.showContent();//关闭
                     startActivity(new Intent(MainActivity.this, ILoginActivity.class));
                     return;
@@ -248,7 +259,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
-        if (FloatWindowManager.getInstance(this).flagone){
+        if (FloatWindowManager.getInstance(this).flagone) {
             Intent intentser = new Intent(this, FloatWindowService.class);
             intentser.putExtra(FloatWindowService.LAYOUT_RES_ID, R.layout.float_window_small);
             intentser.putExtra(FloatWindowService.ROOT_LAYOUT_ID, R.id.ll_gen);
@@ -260,8 +271,8 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
     @Override
     protected void onPause() {
         super.onPause();
-        boolean flag = FloatWindowManager.getInstance(this).isWindowShowing()||FloatWindowManager.getInstance(this).flagone;
-        if (flag){
+        boolean flag = FloatWindowManager.getInstance(this).isWindowShowing() || FloatWindowManager.getInstance(this).flagone;
+        if (flag) {
             FloatWindowManager.getInstance(this).removeAll();
             FloatWindowManager.getInstance(this).flagone = true;
         }
@@ -372,6 +383,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         });
         builder.show();
     }
+
     //相机的权限
     private void requestMultiplePermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -394,6 +406,7 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
 
         }
     }
+
     private void showPhotoDialog() {
         requestMultiplePermissions();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -401,9 +414,9 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
         View contentViews = View.inflate(this, R.layout.photodialog, null);
         dialog.setView(contentViews);
         dialog.show();
-            /**
-             * 设置宽度全屏，要设置在show的后面   试验  不能全屏
-             */
+        /**
+         * 设置宽度全屏，要设置在show的后面   试验  不能全屏
+         */
            /* WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
             //layoutParams.gravity= Gravity.BOTTOM;
             layoutParams.width= WindowManager.LayoutParams.MATCH_PARENT;
@@ -502,9 +515,9 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
             extras = data.getExtras();
             Bitmap photo = null;
             if (extras != null) {
-                 photo = extras.getParcelable("data");
-            }else if(data!=null){
-                 photo = BitmapFactory.decodeFile(data.getData().getPath());
+                photo = extras.getParcelable("data");
+            } else if (data != null) {
+                photo = BitmapFactory.decodeFile(data.getData().getPath());
             }
             try {
                 OutputStream outputStream = new FileOutputStream(file);
@@ -548,6 +561,20 @@ public class MainActivity extends SlidingFragmentActivity implements View.OnClic
                     isExist = false;
                 }
             }, 3000);
+        }
+    }
+
+    private void goToSet() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BASE) {
+            // 进入设置系统应用权限界面
+            Intent intent = new Intent(Settings.ACTION_SETTINGS);
+            startActivity(intent);
+            return;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {// 运行系统在5.x环境使用
+            // 进入设置系统应用权限界面
+            Intent intent = new Intent(Settings.ACTION_SETTINGS);
+            startActivity(intent);
+            return;
         }
     }
 }

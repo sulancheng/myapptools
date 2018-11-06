@@ -160,8 +160,11 @@ public class MyMediaController extends MediaController implements View.OnClickLi
 
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
-        controllerWidth = outMetrics.widthPixels;
-        controllerheigth = outMetrics.heightPixels;
+//        controllerWidth = outMetrics.widthPixels;
+//        controllerheigth = outMetrics.heightPixels;
+
+        controllerWidth = videoView.getWidth();
+        controllerheigth = videoView.getHeight();
         mGestureDetector = new GestureDetector(context, new MyGestureListener());
         setInstantSeeking(true);
     }
