@@ -3,7 +3,6 @@ package com.susu.hh.myapptools.activity;
 import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
@@ -364,7 +363,7 @@ public class DengtexthuaActivity extends Activity implements SurfaceHolder.Callb
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
         // 设置竖屏显示
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         // 选择支持半透明模式,在有surfaceview的activity中使用。
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
     }
