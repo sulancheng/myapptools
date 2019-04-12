@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.susu.hh.myapptools"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -39,4 +39,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testCompile 'junit:junit:4.12'
     compile project(':okgo')
+    //完整版 yj视频播放
+//    compile 'com.ycjiang:VideoPlayModule:2.3.17'
+    //精简版（没有smoothstreaming,dash,hls,只有常规点播功能）
+//    compile 'com.ycjiang:VideoPlayModule-Lite:2.3.17'
 }

@@ -305,7 +305,10 @@
 
         <activity android:name=".mvp.view.ILoginActivity" />
         <activity android:name=".testbaseact.BaseTestActivity" />
-        <activity android:name=".testbaseact.OneBaseActivity">
+        <activity android:name=".testbaseact.OneBaseActivity"></activity>
+        <activity android:name=".activity.yjplay.MyYjPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

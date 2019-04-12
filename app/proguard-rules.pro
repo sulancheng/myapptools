@@ -125,3 +125,6 @@
 #-libraryjars lib_zxing/libs/zxing.jar
 #-keep class XXXX
 #-keepclasseswithmembers class XXXX保留类名不变，也就是类名不混淆，而类中的成员名不保证。当然也可以是继承XXX类的所有类名不混淆，具体代码不贴了，重在理解。
+-dontwarn chuangyuan.ycj.**
+
+-keep class chuangyuan.ycj.** { *;}
